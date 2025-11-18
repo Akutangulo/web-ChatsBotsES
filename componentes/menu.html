@@ -3,20 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio ChatsBotsES</title>
+    <title>Menu ChatsBotsES</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🤖</text></svg>">
-
-<!-- Open Graph básico -->
-<meta property="og:title" content="Modelos LLM disponibles en ChatsBotsES - Akutangulo">
-<meta property="og:description" content="Explora, filtra y prueba modelos de IA en ChatsBotsES: texto, visión, imágenes, audio, código y más. Actualizado a diario.">
-<meta property="og:image" content="https://chatsbots.es/assets/images/modelos-inteligencia-artificial-akutangulo.png">
-<meta property="og:url" content="https://chatsbots.es/modelos-llm-chatsbotses.html">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="ChatsBotsES">
-<meta property="og:locale" content="es_ES">
-<meta property="og:image:alt" content="Akutangulo en ChatsBotsES: nuevos modelos de Inteligencia Artificial, filtrados por tipo, especialidad y capacidades.">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
 
     <link rel="stylesheet" href="./assets/css/chatsbotses.css">
 <style>
@@ -60,249 +48,19 @@ url('./assets/fonts/bauhouse_akutangulo.ttf') format('truetype'); /* archivo TTF
     --color-twitter: #55acee;
     --color-telegram: #0088cc;
 }
+
 .tema-claro {
     --bg-primary: #f9f4ff;
     --bg-secondary: #f0e6ff;
     --bg-surface: #e6d8ff;
-    --text-primary: #4a148c;
-    --text-secondary: #6a3d9a;
-    --text-muted: #9e7bcc;
-    --accent-primary: #8e24aa;
-    --accent-secondary: #ab47bc;
-    --border: #cbb8e6;
+    --text-primary: #2c004b;
+    --text-secondary: #4e2a72;
+    --text-muted: #7b5ca3;
+    --accent-primary: #7b1fa2;
+    --accent-secondary: #8e2eb4;
+    --border: #b197d8;
     --color-sombra: #0ff;
 }
-
-body {
-    margin: 0;
-    font-family: "Afacad Flux", sans-serif;
-    background-color: var(--bg-primary);
-    color: var(--text);
-}
-
-main {
-    padding: 1rem;
-}
-
-/* ------------------------- */
-
-h1 {
-    font-size: 3rem;
-    padding: 0.1rem 3rem;
-}
-h2 {
-    font-size: 2rem;
-    padding: 0.1rem 3rem;
-}
-h3 {
-    font-size: 1.5rem;
-    padding: 0.1rem 3rem;
-}
-@media (max-width: 768px) {
-    h1 {
-        font-size: 2rem;
-        padding: 0.1rem 1rem;
-    }
-    h2 {
-        font-size: 1.7rem;
-        padding: 0.1rem 1rem;
-    }
-    h3 {
-        font-size: 1.3rem;
-        padding: 0.1rem 1rem;
-    }
-}
-
-footer {
-    background-color: var(--color-akutangulo);
-    color: var(--bg);
-    text-align: center;
-    padding: 10px 20px;
-    margin-top: 20px;
-    font-size: 1.3rem;
-}
-footer a {
-    color: var(--bg);
-    font-size: 1rem;
-}
-.footer {
-    padding: 1rem;
-    text-align: center;
-    margin-bottom: 1.5rem;
-}
-.footer a {
-    text-decoration: none;
-}
-.copyright {
-    color: var(--text-primary);
-    font-size: 1.2rem;
-}
-footer .icon {
-    padding: 0rem 0.3rem;
-    display: inline-block;
-    position: relative;
-    top: 0.6rem;
-}
-.akutangulo-diseño-web-seo-ia {
-    font-family: 'bauhouse_akutangulo';
-    color: #9400D3;
-    animation: glow 10s ease-in-out infinite;
-}
-
-
-
-
-
-
-
-
-
-
-    /*************************************************
-    * Contenedor
-    *************************************************/
-    .contenedor-botones-chatsbotses {
-      display:flex;
-      flex-wrap:wrap;
-      justify-content:center;
-      gap:2rem;
-      padding:2rem;
-      margin:0 auto;
-      box-sizing:border-box;
-    }
-
-    /*************************************************
-    * Botón (contenedor 3D)
-    *************************************************/
-    .boton-akutangulo {
-      cursor:pointer;
-      height: var(--btn-h);
-      width: 280px;            
-      perspective: 1000px;
-      display:block;
-      margin: 2rem auto;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .boton-akutangulo:active{
-      transform: translateY(1px) scale(0.98); /* feedback click */
-    }
-
-    .flipper3d{
-      transition: transform 0.5s ease-in-out;
-      transform-style: preserve-3d;
-      position: relative;
-      /* origen en el borde derecho, vertical centrado según --btn-half */
-      transform-origin: 100% var(--btn-half);
-      width:100%;
-      height:100%;
-    }
-
-    /* Soporte para teclado/touch: focus-within activa el flip igual que hover */
-    .boton-akutangulo:focus-within .flipper3d { outline: none; }
-
-    /*************************************************
-    * Caras del botón (misma placa para front/back)
-    *************************************************/
-    .boton-aku{
-      height:100%;
-      width:100%;
-      backface-visibility: hidden;
-      position:absolute;
-      top:0;
-      left:0;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      box-shadow: 1px 2px 4px -1px rgba(60,60,60,0.64);
-      background: linear-gradient(90deg, var(--color-akutangulo) 0%, var(--color-chatsbotses) 50%, var(--color-cta) 100%);
-      background-size: 200% 100%;
-      padding:5px;
-      box-sizing: border-box;
-      transition: transform 0.3s ease, box-shadow 0.3s ease, background-position 0.8s ease;
-      animation: gradient-animation 5s ease infinite;
-      color: var(--color-texto-botones);
-      text-align:center;
-      overflow: visible; /* permitimos overflow del icono grande (intencionado) */
-    }
-
-    @keyframes gradient-animation {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    /* FRONTAL: la placa y el icono grande */
-    .front{
-      transform: translateZ(var(--btn-half));
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-
-    /* TRASERA: texto (se orienta según variante up/down abajo) */
-    .back {
-      color: #212121;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      line-height: 1.4;
-      display:flex;
-      flex-direction: column;
-      justify-content: center;
-      text-align: center;
-      white-space: normal;
-      word-break: break-word;
-      padding: 4px;
-    }
-
-    /* Efecto up (entra desde arriba): back preparado */
-    .boton-akutangulo-flip3d-up .back {
-      transform: rotateX(90deg) translateZ(var(--btn-half));
-    }
-    /* Hover / focus -> gira -90deg para up */
-    .boton-akutangulo-flip3d-up:hover .flipper3d,
-    .boton-akutangulo-flip3d-up:focus-within .flipper3d {
-      transform: rotateX(-90deg);
-    }
-
-    /* Efecto down (entra desde abajo): back preparado y orientado para leerse bien */
-    .boton-akutangulo-flip3d-down .back {
-      transform: rotateX(90deg) rotateZ(180deg) rotateY(180deg) translateZ(var(--btn-half));
-    }
-    /* Hover / focus -> gira +90deg para down */
-    .boton-akutangulo-flip3d-down:hover .flipper3d,
-    .boton-akutangulo-flip3d-down:focus-within .flipper3d {
-      transform: rotateX(90deg);
-    }
-
-    /*************************************************
-    * Iconos (con tamaño intencionalmente grande)
-    *************************************************/
-    .iconos-botones-sociales {
-      font-size: 7em; 
-      color: var(--color-akutangulo);
-      margin: 0 0 5px 0;
-      line-height: 1;
-      display: block;
-      -webkit-text-stroke: 1px var(--color-transparente);
-      text-rendering: optimizeLegibility;
-      pointer-events: none; /* el icono no debe capturar el pointer */
-    }
-
-    .iconos-botones-sociales.telegram { color: var(--color-telegram); }
-    .iconos-botones-sociales.fa-twitter { color: var(--color-twitter); }
-    .iconos-botones-sociales.fa-facebook-square { color: var(--color-facebook); }
-
-    /*************************************************
-    * Responsive 
-    *************************************************/
-    @media (max-width: 1024px) {
-      .contenedor-botones-chatsbotses { gap:1rem; padding:1.5rem; }
-      .boton-akutangulo { width: 260px; }
-    }
-    @media (max-width: 768px) {
-      .boton-akutangulo { width: 240px; }
-    }
 
     
 /* ===== EFECTOS ===== */
@@ -321,39 +79,6 @@ footer .icon {
     box-shadow: 0 0 0 10px rgba(232, 76, 61, 0);
   }
 }
-
-@keyframes neon-color-change {
-  0%,
-  100% {
-    color: #0ff;
-  }
-
-  25% {
-    color: #f0f;
-  }
-
-  50% {
-    color: #ff0;
-  }
-
-  75% {
-    color: #0f0;
-  }
-}
-
-.neon-text {
-  font-weight: 900;
-  animation: neon-color-change 30s infinite;
-  transition: all 0.5s ease-in-out;
-  -webkit-text-stroke: 1px var(--text);
-}
-
-.neon-text:hover {
-  animation: none;
-  color: var(--color-chatsbotses);
-  text-shadow: 0 0 10px var(--color-chatsbotses);
-}
-
 
 /******************************************
 /* ===== NAVBAR GENERAL ===== */
@@ -784,111 +509,12 @@ iframe.presentacion-chatsbotses {
       <button type="button" class="cta-button pulse btn-contacto">Pide tu presupuesto personalizado</button>
       <a href="./como-crear-prompts.html" class="cta-button pulse">Cómo crear Prompts efectivos</a>
     </nav>
-        <cambiar-tema-chatsbotses></cambiar-tema-chatsbotses>
+
     </header>
     <main>
-        <h1 class="neon-text">Chatbot de IA para servicio al cliente automatizado y generación de oportunidades de venta</h1>
-        <div style="height: 600px;"></div>
-        
+        <!-- Contenido principal de la página -->        
     </main>
-  <section class="contenedor-botones-chatsbotses">
 
-    <!-- Botón Telegram (flip down) -->
-    <a href="https://t.me/akutangulo" rel="noopener noreferrer me" target="_blank" title="Sigue a Akutangulo en Telegram" aria-label="Sigue a Akutangulo en Telegram y entérate de las últimas noticias sobre Inteligencia Artificial." role="button">
-      <div class="boton-akutangulo boton-akutangulo-flip3d-down">
-        <div class="flipper3d">
-          <div class="boton-aku front">
-            <i class="fa-brands fa-telegram iconos-botones-sociales telegram" aria-hidden="true"></i>
-          </div>
-          <div class="boton-aku back">
-            Sígueme en Telegram<br><strong>Akutangulo</strong>
-          </div>
-        </div>
-      </div>
-    </a>
-
-    <!-- Botón Facebook (flip up) -->
-    <a href="https://www.facebook.com/profile.php?id=61567044121441" rel="noopener noreferrer" target="_blank" title="Sígueme en Facebook" role="button">
-      <div class="boton-akutangulo boton-akutangulo-flip3d-up">
-        <div class="flipper3d">
-          <div class="boton-aku front">
-            <i class="fab fa-facebook-square iconos-botones-sociales" aria-hidden="true"></i>
-          </div>
-          <div class="boton-aku back">
-            Sígueme en Facebook<br/><b>Chatsbotses Akutangulo</b>
-          </div>
-        </div>
-      </div>
-    </a>
-
-    <!-- Botón Twitter (flip up) -->
-    <a href="https://x.com/chatsbotses" rel="noopener noreferrer" target="_blank" title="Sígueme en Twitter" role="button">
-      <div class="boton-akutangulo boton-akutangulo-flip3d-up">
-        <div class="flipper3d">
-          <div class="boton-aku front">
-            <i class="fa fa-twitter iconos-botones-sociales" aria-hidden="true"></i>
-          </div>
-          <div class="boton-aku back">
-            Sígueme en Twitter<br/><b>@chatsbotses</b>
-          </div>
-        </div>
-      </div>
-    </a>
-
-    <!-- Botón Email (flip down) -->
-    <a href="mailto:info@chatsbots.es?subject=Solicitud%20de%20informacion" title="Envíame un correo electrónico" role="button">
-      <div class="boton-akutangulo boton-akutangulo-flip3d-down">
-        <div class="flipper3d">
-          <div class="boton-aku front">
-            <i class="fas fa-at iconos-botones-sociales" aria-hidden="true"></i>
-          </div>
-          <div class="boton-aku back">
-            Contacta por mail desde<br/>
-            <b>info@chatsbots.es</b>
-          </div>
-        </div>
-      </div>
-    </a>
-
-  </section>
-
-<footer>
-    <p class="footer-legal">© <span class="copyright-year">2025</span> <span class="icon"><icono-chatsbotses size="35px"></icono-chatsbotses></span> ChatsBotsES Inteligentes. Todos los derechos reservados.</p>
-    <!-- ENLACES CORREGIDOS: Enlaces de contenido apuntan a secciones de contenido -->
-    <p>
-        <a href="#inicio">Inicio</a> | 
-        <a href="#chatbots-atencion-cliente">Chatbots de atención al cliente 24/7</a> | 
-        <a href="#chatbots-internos">Chatbots para empleados</a> | 
-        <a href="#memoria-rag">Chatbots con memoria</a> | 
-        <a href="#gestor-correos">Agentes para gestionar correos</a> | 
-        <a href="#automatizaciones">Automatizaciones a medida</a> | 
-        <a href="#modelos-llm-chatsbotses">Modelos LLM</a> | 
-        <a href="#precios-chatsbotses-automatizaciones">Precios</a> | 
-        <a href="#contacto">Contacto</a>
-    </p>
-    <!-- Enlaces legales se mantienen correctos -->
-    <p><a href="legal/politica-privacidad.html">Política de Privacidad</a> | <a href="legal/politica-cookies.html">Política de Cookies</a> | <a href="legal/aviso-legal.html">Aviso Legal</a> | <a href="legal/terminos-condiciones.html">Términos y Condiciones del Servicio</a> | <a href="#" class="btn-contacto">Contacto</a></p>
-    
-</footer>
-<div class="footer">
-  <div class="footer-logo">
-    <a href="https://akutangulo.com" title="Logo de Akutangulo diseño de páginas web, posicionamiento SEO, fotografía 360 para empresas, chatbots y agentes con Inteligencia Artificial en Valladolid. Oscar Navarro.">
-      <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="35.000000pt" height="35.000000pt" viewBox="0 0 58.000000 67.000000" preserveAspectRatio="xMidYMid meet">
-       <metadata>Logo de Akutangulo diseño de páginas web, posicionamiento SEO, fotografía 360 para empresas, chatbots y agentes con Inteligencia Artificial en Valladolid. Oscar Navarro. </metadata>
-       <g transform="translate(0.000000,65.000000) scale(0.100000,-0.100000)" fill="#9300D3" stroke="none">
-       <path class="animacion-logo-svg" d="M175 551 c-112 -52 -169 -207 -120 -329 19 -45 86 -112 172 -169 51 -35 52 -35 77 -16 24 17 25 22 26 125 l0 106 -38 -5 c-51 -7 -77 21 -68 72 8 42 41 60 80 45 40 -15 46 -40 46 -182 l0 -133 90 9 90 10 0 156 c0 147 -1 159 -25 207 -26 51 -72 91 -128 112 -46 18 -157 13 -202 -8z"></path>
-       </g>
-       </svg>          
-    </a>
-  </div>
-<div class="copyright">
-  <p>Web diseñada con amor ❤️ por <a href="https://akutangulo.com" rel="noopener" target="_blank" title="Akutangulo diseño de páginas web, posicionamiento SEO, fotografía 360 para empresas y chatbots y agentes con Inteligencia Artificial en Valladolid" aria-label="Akutangulo diseño de páginas web, posicionamiento SEO, fotografía 360 para empresas, chatbots y agentes con Inteligencia Artificial en Valladolid" class="akutangulo-diseño-web-seo-ia">Akutangulo.com</a></p> 
-</div>
-
-</div>
-<boton-volver-arriba></boton-volver-arriba>
-<!-- Font Awesome -->
-<script src="https://kit.fontawesome.com/64393aa48f.js" crossorigin="anonymous" async></script>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -1094,9 +720,6 @@ document.addEventListener('DOMContentLoaded', () => {
   setInitialAriaState();
 });
 </script>
-    <script>document.querySelectorAll(".copyright-year").forEach(function(element) {element.textContent = new Date().getFullYear();});</script>
-    <script type="module" src="./assets/js/web-components/boton-volver-arriba.js"></script>
     <script type="module" src="./assets/js/web-components/icono-chatsbotses.js"></script>
-    <script type="module" src="./assets/js/web-components/cambiar-tema-chatsbotses.js"></script>
 </body>
 </html>
