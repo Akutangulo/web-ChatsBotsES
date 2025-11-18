@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIV Mágico con HTML y CSS</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🤖</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script type="module" src="../assets/web-components/cambiar-tema-chatsbotses.js"></script>
+
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+@font-face {
+font-family: 'bauhouse_akutangulo';
+src: url('./assets/fonts/bauhouse_akutangulo.eot'); /* archivo EOT para IE */ 
+src: url('./assets/fonts/bauhouse_akutangulo.eot?#iefix') format('embedded-opentype'),
+url('./assets/fonts/bauhouse_akutangulo.ttf') format('truetype'); /* archivo TTF para navegadores CSS3 */ 
+}
+
+:root {
+    /* Altura del botón (centralizada para cálculos) */
+    --btn-h: 50px; 
+    --btn-half: calc(var(--btn-h) / 2); /* translateZ coherente */
+
+    --color-akutangulo: #9300D3;
+    --color-chatsbotses: #0ff;
+    --color-menu: #7a00b3;
+    --primary: #8e24aa;
+    --secondary: #d500f9;
+    --light: #ea80fc;
+    --bg: #f9f0ff;
+    --text: #4a0072;
+    --hover-bg: #b388ff;
+    --color-cta: #00C2FF;
+    --color-transparente: rgba(245,247,255,0.3);
+    --bg-primary: #1e0b2d;
+    --bg-secondary: #2c1443;
+    --bg-surface: #4a1d7d;
+    --text-primary: #e1b0ff;
+    /* CORRECCIÓN DE CONTRASTE: Se cambia de #b080e0 a #c499ec para cumplir WCAG AA contra --bg-secondary */
+    --text-secondary: #c499ec; 
+    --text-muted: #8a5ca9;
+    --accent-primary: #d500f9;
+    --accent-secondary: #a267ff;
+    --border: #5e3aad;
+    --color-sombra: #9300D3;
+    /* Redes Sociales */
+    --color-facebook: #3b5999;
+    --color-twitter: #55acee;
+    --color-telegram: #0088cc;
+}
+.tema-claro {
+    --bg-primary: #f9f4ff;
+    --bg-secondary: #f0e6ff;
+    --bg-surface: #e6d8ff;
+    --text-primary: #2c004b;
+    --text-secondary: #4e2a72;
+    --text-muted: #7b5ca3;
+    --accent-primary: #7b1fa2;
+    --accent-secondary: #8e2eb4;
+    --border: #b197d8;
+    --color-sombra: #0ff;
+}
+
+        /* --- Reseteo Básico y Estilos Globales --- */
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Afacad Flux", sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* --- Contenedor Principal --- */
+        .container {
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 1.5rem;
+        }
+
+        /* --- Estructura del DIV Mágico --- */
+        .magic-div {
+            padding: 4rem 0;
+        }
+        
+        /* Alternancia de color de fondo para las secciones */
+        .magic-div:nth-of-type(even) {
+            background-color: var(--bg-secondary);
+        }
+
+        .magic-div-content {
+            display: flex;
+            /* Móvil primero: una sola columna */
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* --- Contenido Multimedia --- */
+        .media-content {
+            /* El contenido multimedia va primero en el DOM para el orden en móvil */
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .media-content img,
+        .media-content video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Asegura que la imagen/video cubra el contenedor sin deformarse */
+            display: block;
+        }
+
+        /* --- Contenido de Texto --- */
+        .text-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .text-wrapper {
+            /* REGLA CLAVE: Limita el ancho del texto para una legibilidad óptima */
+            max-width: 75ch; /* 75 caracteres de ancho, el punto dulce entre 60 y 80 */
+        }
+        
+        .text-content h3 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .text-content p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .text-content strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .text-content ul {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .text-content li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .text-content .icon {
+            flex-shrink: 0;
+            width: 24px;
+            height: 24px;
+            color: var(--color-akutangulo);
+            margin-top: 2px;
+        }
+        
+        .action-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            background-color: var(--color-akutangulo);
+            color: #fff;
+            font-weight: 500;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+        }
+
+        .action-button:hover,
+        /* CORRECCIÓN DE FOCO: Añadir un estilo visible y contrastante para la navegación con teclado */
+        .action-button:focus { 
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+            outline: 3px solid var(--accent-primary);
+            outline-offset: 2px;
+        }
+
+        .action-button .icon {
+           /* CORRECCIÓN DE CONTRASTE: Se cambia el color a --text-primary (#e1b0ff) */
+           color: var(--text-primary);
+           width: 20px;
+           height: 20px;
+        }
+
+
+        /* --- Media Query para pantallas grandes (Tablets y Escritorio) --- */
+        @media (min-width: 1024px) {
+            .magic-div {
+                padding: 6rem 0;
+            }
+            
+            .magic-div-content {
+                /* Pantalla grande: dos columnas */
+                flex-direction: row;
+                align-items: stretch; /* REGLA CLAVE: Iguala la altura de ambas columnas */
+                gap: 4rem;
+            }
+
+            .media-content,
+            .text-content {
+                width: 50%;
+                flex: 1 1 50%;
+            }
+
+            .text-content {
+                /* Por defecto, el texto irá a la derecha */
+                order: 2;
+            }
+            
+            .media-content {
+                 /* Por defecto, el contenido irá a la izquierda */
+                order: 1;
+            }
+            
+            /* REGLA CLAVE: Para las secciones alternas, invertimos el orden */
+            .magic-div.alternate .text-content {
+                order: 1;
+            }
+            
+            .magic-div.alternate .media-content {
+                order: 2;
+            }
+        }
+
+        /* ===== EFECTOS ===== */
+.pulse {
+  box-shadow: 0 0 0 0 rgb(0, 255, 255);
+  cursor: pointer;
+  animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+}
+
+.pulse:hover {
+  animation: none;
+}
+
+@keyframes pulse {
+  to {
+    box-shadow: 0 0 0 10px rgba(232, 76, 61, 0);
+  }
+}
+
+@keyframes neon-color-change {
+  0%,
+  100% {
+    color: #0ff;
+  }
+
+  25% {
+    color: #f0f;
+  }
+
+  50% {
+    color: #ff0;
+  }
+
+  75% {
+    color: #0f0;
+  }
+}
+
+.neon-text {
+  font-weight: 900;
+  animation: neon-color-change 30s infinite;
+  transition: all 0.5s ease-in-out;
+  -webkit-text-stroke: 1px var(--text);
+}
+
+.neon-text:hover {
+  animation: none;
+  color: var(--color-chatsbotses);
+  text-shadow: 0 0 10px var(--color-chatsbotses);
+}
+/* ------------------------- */
+
+h1 {
+    font-size: 3rem;
+    padding: 0.1rem 3rem;
+    text-align: center;
+}
+h2 {
+    font-size: 2.5rem;
+    padding: 0.1rem 3rem;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+h3 {
+    font-size: 1.5rem;
+}
+@media (max-width: 768px) {
+h1 {
+    font-size: 2rem;
+    padding: 0.1rem 1rem;
+}
+h2 {
+    font-size: 1.7rem;
+    padding: 0.1rem 1rem;
+}
+h3 {
+    font-size: 1.3rem;
+}
+}
+    </style>
+</head>
+<body>
+
+    <header style="padding: 2rem; text-align: center; background-color: var(--bg-secondary);">
+        <div class="container">
+            <h1 class="neon-text">El DIV Mágico</h1>
+            <p style="font-size: 1.25rem; color: var(--text-secondary); max-width: 60ch; margin: 1rem auto 0;">Una demostración de maquetación avanzada, responsiva y elegante solo con HTML y CSS.</p>
+        </div>
+        <cambiar-tema-chatsbotses></cambiar-tema-chatsbotses>
+    </header>
+
+    <main>
+        <!-- SECCIÓN 1: Texto a la izquierda, Imagen a la derecha -->
+        <section class="magic-div">
+            <div class="container">
+                <h2 class="neon-text">Integración y Diseño Fluido</h2>
+                <div class="magic-div-content">
+                    <div class="media-content">
+                        <img src="https://picsum.photos/seed/tech1/800/600" alt="Espacio de trabajo con tecnología moderna">
+                    </div>
+                    <div class="text-content">
+                        <div class="text-wrapper">
+                            <h3 class="neon-text">Diseñado para la Claridad</h3>
+                            <p>
+                                Este componente está diseñado para presentar tu contenido con el máximo impacto. El texto está formateado para una legibilidad superior, asegurando que tu mensaje sea claro y atractivo.
+                            </p>
+                            <ul>
+                                <li>
+
+                                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span><strong>Totalmente Responsivo:</strong> Visualización perfecta en ordenadores, tabletas y móviles.</span>
+                                </li>
+                                <li>
+
+                                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span><strong>Lectura Óptima:</strong> Las líneas de texto se limitan a 60-80 caracteres para una lectura cómoda.</span>
+                                </li>
+                            </ul>
+                            <a href="#" class="action-button">
+                                Aprender Más
+                                <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: Imagen a la izquierda, Texto a la derecha (clase 'alternate') -->
+        <section class="magic-div alternate">
+            <div class="container">
+                <h2 class="neon-text">Visualización de Datos</h2>
+                <div class="magic-div-content">
+                    <div class="media-content">
+                         <img src="https://picsum.photos/seed/chart1/800/600" alt="Gráfico de barras de ejemplo">
+                    </div>
+                    <div class="text-content">
+                        <div class="text-wrapper">
+                            <h3 class="neon-text">Muestra tu Éxito</h3>
+                            <p>
+                                Integra visualizaciones de datos complejas sin esfuerzo. El contenedor multimedia se adapta a la altura de tu texto, creando un diseño equilibrado y profesional para gráficos y contenido dinámico.
+                            </p>
+                             <p>
+                                Muestra tus métricas de rendimiento, la participación del usuario o datos financieros con componentes limpios y responsivos.
+                            </p>
+                            <a href="#" class="action-button">
+                                Explorar Datos
+                                <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="magic-div">
+            <div class="container">
+                <h2 class="neon-text">Experiencia Multimedia Atractiva</h2>
+                <div class="magic-div-content">
+                    <div class="media-content">
+                        <video controls muted loop poster="https://picsum.photos/seed/video1/800/600">
+                            <source src="https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+                            <track kind="captions" label="Español" src="subtitulos-del-video.vtt" srclang="es" default>
+                            Tu navegador no soporta la etiqueta de video.
+                        </video>
+                    </div>
+                    <div class="text-content">
+                        <div class="text-wrapper">
+                            <h3 class="neon-text">Dale Vida a tu Historia</h3>
+                            <p>
+                                Inserta videos directamente en tu diseño. El diseño alterno mantiene a los usuarios interesados mientras se desplazan por tu página, creando un flujo narrativo dinámico que cautiva e informa.
+                            </p>
+                            <ul>
+                                <li>
+                                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span><strong>Reproducción fluida:</strong> Compatible con los formatos de vídeo estándar para una amplia compatibilidad.</span>
+                                </li>
+                                <li>
+                                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span><strong>Altura autoajustable:</strong> El reproductor de vídeo encaja perfectamente junto a tu contenido textual.</span>
+                                </li>
+                            </ul>
+                            <a href="#" class="action-button">
+                                Ver Ahora
+                               <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer style="padding: 2rem; text-align: center; background-color: var(--bg-secondary);">
+        <div class="container">
+            <p style="color: var(--text-secondary);">&copy; 2025 DIV Mágico. Todos los derechos reservados. Akutangulo</p>
+        </div>
+    </footer>
+
+</body>
+</html>
