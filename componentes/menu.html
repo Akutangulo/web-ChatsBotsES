@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu ChatsBotsES</title>
+    <title>Inicio ChatsBotsES</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🤖</text></svg>">
 
     <link rel="stylesheet" href="./assets/css/chatsbotses.css">
@@ -101,7 +101,7 @@ url('./assets/fonts/bauhouse_akutangulo.ttf') format('truetype'); /* archivo TTF
   padding: 0.6rem;
 }
 
-/* ===== MARCA ===== */
+/* ===== MARCA CHATSBOTSES ===== */
 .brand-chatsbotses {
   font-size: 1.5rem;
   font-weight: bold;
@@ -216,7 +216,7 @@ url('./assets/fonts/bauhouse_akutangulo.ttf') format('truetype'); /* archivo TTF
 }
 
 .has-submenu.open .submenu {
-  max-height: fit-content;
+  max-height: 800px;
   opacity: 1;
   visibility: visible;
   padding: 0.5rem 1rem;
@@ -228,7 +228,7 @@ url('./assets/fonts/bauhouse_akutangulo.ttf') format('truetype'); /* archivo TTF
   display: block;
 }
 
-/* **NUEVO CSS para UX de ESCRITORIO (Focus-within/Hover)** */
+/* CSS para UX de ESCRITORIO (Focus-within/Hover) */
 @media (min-width: 769px) { 
     /* Abrir submenú al pasar el ratón o al navegar con el teclado */
     .has-submenu:hover .submenu,
@@ -327,7 +327,7 @@ url('./assets/fonts/bauhouse_akutangulo.ttf') format('truetype'); /* archivo TTF
 
   .submenu {
     position: static;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.35);
     box-shadow: none;
     width: 90%;
     padding: 0;
@@ -599,7 +599,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!menu.classList.contains('active') || !isMobile()) return;
 
     // Obtener la lista de elementos enfocables dentro del menú
-    // .filter(el => el.offsetParent !== null) asegura que estén visibles (no display: none)
     const focusableElements = Array.from(menu.querySelectorAll(focusableElementsSelector)).filter(el => el.offsetParent !== null);
     
     if (focusableElements.length === 0) return;
@@ -656,13 +655,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Listener para el enlace (NUEVO: Hace que el clic en el texto ABRA/CIERRE el submenú)
     if (link) {
         link.addEventListener('click', (e) => {
-            // El preventDefault BLOQUEA LA NAVEGACIÓN, permitiendo que el clic solo sea un TOGGLE.
-            e.preventDefault(); 
-            e.stopPropagation(); 
-            
-            // Abrimos/cerramos el submenú, igual que el botón
-            item.classList.contains('open') ? closeSubmenu(item) : openSubmenu(item);
-        });
+    // SOLO bloquea navegación en móvil
+    if (isMobile()) {
+        e.preventDefault(); 
+        e.stopPropagation();
+        item.classList.contains('open') ? closeSubmenu(item) : openSubmenu(item);
+    }
+    });
     }
 
   });
