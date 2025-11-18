@@ -1,1 +1,695 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modelos LLM disponibles en ChatsBotsES - Akutangulo</title>
+    <meta name="description" content="Explora y compara los modelos LLM disponibles en ChatsBotsES. Filtra por tipo, coste y capacidades.">
+    <link rel="stylesheet" href="./assets/css/chatsbotses.css">
 
+    <style>
+/* Variables Globales */
+:root {
+    --primary-color: #9300D3; /* Color primario para encabezados y detalles */
+    --secondary-color: #0ff; /* Color secundario para efectos y enlaces */
+    --text-color: #f8f8f8; /* Color del texto por defecto */
+    --bg-color: #121212; /* Color de fondo oscuro */
+    --card-bg: #1E1E1E; /* Fondo de tarjeta oscuro */
+    --header-color: var(--primary-color); /* Color del encabezado principal */
+    --detail-color: #CCCCCC; /* Detalle de texto, generalmente gris claro */
+    --border-color: #333;
+    --shadow-color: rgba(0, 0, 0, 0.5);
+    --success-color: #2ecc71;
+    --error-color: #e74c3c;
+}
+.tema-claro {
+    --text-color: #191919; /* Cambia el color del texto para modo claro */
+    --bg-color: #fafbfd; /* Fondo blanco para modo claro */
+    --card-bg: #CCCCCC; /* Fondo de tarjeta gris claro */
+    --header-color: #2c3e50; /* Color neutro para encabezado en modo claro */
+    --detail-color: #3f3f3f; /* Detalle de texto oscuro para contraste */
+}
+body {
+    font-family: "Afacad Flux", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+}
+header {
+    text-align: center;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    padding: 1rem;
+}
+h1, h2, h3 {
+    font-family: "Afacad Flux", sans-serif;
+    font-weight: 900; /* Grosor fuerte para destacar */
+    color: var(--header-color); /* Utiliza el color de texto primario */
+    transition: color 0.3s ease, text-shadow 0.3s ease; /* Transición para hover */
+}
+/* Estilización de h1 */
+h1#main-title {
+    font-size: 3rem; /* Tamaño destacado para h1 */
+    color: var(--primary-color); /* Color primario para h1 */
+    text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color); /* Efecto resplandor */
+    -webkit-text-stroke: 1px var(--secondary-color);
+}
+h1#main-title:hover {
+    color: var(--secondary-color); /* Cambia a color secundario en hover */
+    text-shadow: 0 0 15px var(--secondary-color), 0 0 25px var(--secondary-color);
+}
+/* Estilización de h2 */
+h2.group-header {
+    font-size: 2.5rem;
+    color: var(--primary-color); /* Consistencia en color de título */
+    text-shadow: 0 0 8px var(--primary-color), 0 0 12px var(--primary-color);
+}
+h2.group-header:hover {
+    color: var(--secondary-color);
+}
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+header {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 20px 0;
+}
+/* El buscador ocupa toda la fila y se separa del resto */
+#controls-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 5px 20px;
+    padding: 20px;
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 4px var(--shadow-color);
+}
+/* Mejora para el buscador en pantallas grandes */
+.control-group:first-child {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
+#searchInput {
+    width: 50%;
+    max-width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1em;
+    background-color: #fff;
+    color: #333;
+    box-sizing: border-box;
+    transition: width 0.2s;
+    margin-top: 5px;
+}
+/* En pantallas pequeñas, el buscador ocupa todo el ancho */
+@media (max-width: 700px) {
+    #searchInput {
+        width: 100%;
+    }
+    #controls-container {
+        grid-template-columns: 1fr;
+    }
+    .control-group select {
+        width: 100%;
+        box-sizing: border-box; 
+    }
+}
+.control-group label {
+    font-weight: 500;
+    color: var(--text-color);
+}
+.control-group select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1em;
+    background-color: #fff;
+    color: #333;
+}
+#status-message {
+    text-align: center;
+    font-size: 1.2em;
+    color: var(--detail-color);
+    padding: 40px 0;
+}
+#models-container {
+    padding: 0;
+    margin: 0;
+}
+.group-header {
+    font-size: 1.5em;
+    font-weight: 500;
+    color: var(--primary-color);
+    margin-top: 40px;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border-color);
+    text-align: center;
+}
+.group-header:first-of-type {
+    margin-top: 0;
+}
+.model-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+.model-item {
+    background-color: var(--card-bg);
+    margin-bottom: 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 4px var(--shadow-color);
+    transition: box-shadow 0.2s ease-in-out;
+}
+.model-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 22px;
+    cursor: pointer;
+}
+.model-name-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: copy;
+    position: relative;
+    padding: 5px;
+    margin: -5px;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+}
+.model-name-wrapper:hover {
+    background-color: rgba(147, 0, 211, 0.1);
+}
+.model-name {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: var(--header-color);
+    word-break: break-word;
+}
+.summary-right-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.sort-metric {
+    font-size: 0.95em;
+    color: var(--detail-color);
+    background-color: var(--bg-color);
+    padding: 4px 10px;
+    border-radius: 12px;
+    white-space: nowrap;
+}
+.summary-icons {
+    display: flex;
+    gap: 8px;
+    font-size: 1.3em;
+}
+.summary-icons span {
+    cursor: help;
+}
+.model-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+    padding: 0 22px;
+    font-size: 0.9em;
+}
+.model-details.expanded {
+    max-height: 500px;
+    padding: 16px 22px;
+    border-top: 1px solid var(--border-color);
+}
+.detail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 10px 20px;
+}
+.detail-grid span {
+    display: flex;
+}
+.detail-grid strong {
+    display: inline-block;
+    width: 160px;
+    color: var(--text-color);
+    flex-shrink: 0;
+}
+.detail-grid a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    word-break: break-all;
+}
+.detail-grid a:hover {
+    text-decoration: underline;
+}
+.detail-grid strong a {
+    color: var(--secondary-color);
+    font-weight: bold;
+}
+.detail-grid strong a:hover {
+    text-decoration: underline;
+}
+@media (max-width: 600px) {
+    h1#main-title {
+        font-size: 1.9em;
+    }
+    .container {
+        padding: 0 15px;
+    }
+    .group-header {
+        font-size: 1.3em;
+    }
+    .model-name {
+        font-size: 1em;
+    }
+    .model-summary {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+}
+/* Extra */
+.data-source-link {
+    margin: 10px 0 0 0;
+    font-size: 0.9em;
+    color: var(--detail-color);
+    font-weight: 400;
+}
+.data-source-link a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+.data-source-link a:hover {
+    text-decoration: underline;
+}
+.checkbox-control {
+    display: flex;
+    align-items: center;
+}
+.checkbox-control input {
+    margin-right: 8px;
+}
+.error-message {
+    color: var(--error-color); text-align: center; padding: 20px; background-color: rgba(231, 76, 60, 0.1); border-radius: 8px; border-left: 4px solid var(--error-color);
+}
+.retry-button {
+    margin-top: 10px; padding: 8px 16px; background-color: var(--error-color); color: white; border: none; border-radius: 4px; cursor: pointer;
+}
+    </style>
+</head>
+<body>
+<button class="theme-toggle" onclick="toggleTheme()" aria-label="Cambiar tema de color">🌓</button>
+<iframe src="./assets/robot-chatbot.html" width="100%" height="500px" style="border: none;" title="Chatsbotses Inteligentes - Soluciones de chatbots con inteligencia artificial para tu empresa o negocio"></iframe>
+<header>
+    <h1 class="chatsbotses neon-text"><span class="emoji-logo">🤖</span> ChatsBots.es</h1>
+    <button class="menu-hamburguesa" id="menu-hamburguesa" onclick="toggleMenu()" aria-expanded="false" aria-controls="nav" title="menu ChatsBotsES">
+    <i class="fas fa-bars"></i>
+</button>
+    <nav id="nav">
+        <a href="index.html">Inicio</a>
+        <a href="./index.html#caracteristicas">Características</a>
+        <a href="./index.html#precios">Precios</a>
+        <a href="#">Modelos LLM</a>
+        <a href="./index.html#contacto" class="btn-contacto">Contacto</a>
+    </nav>
+</header>
+    <div class="container">
+        <h1 id="main-title">Modelos LLM disponibles en ChatsBotsES</h1>
+            <p class="data-source-link">
+            Clasificación de modelos por <a href="https://lmarena.ai/leaderboard" target="_blank" rel="noopener noreferrer">LMArena.ai</a>
+            </p>
+<div id="controls-container">
+    <div class="control-group">
+        <label for="searchInput">Buscar modelo por nombre o ID:</label>
+        <input type="search" id="searchInput" placeholder="GPT-5, openai/gpt-5">
+        
+    </div>
+            <div class="control-group">
+                
+                <label for="typeSelect">Tipo de Modelo:</label>
+                <select id="typeSelect">
+                    <!-- HTML ACTUALIZADO SOLO AQUÍ -->
+                    <option value="all">Todos los Modelos</option>
+                    <optgroup label="Por Modalidad">
+                        <option value="text-only">Texto a Texto</option>
+                        <option value="multimodal">Multimodal (Visión)</option>
+                        <option value="image-generation">Generación de Imágenes</option>
+                        <option value="audio-capable">Capacidad de Audio</option>
+                    </optgroup>
+                    <optgroup label="Por Especialización">
+                        <option value="reasoning">Especialistas en Razonamiento</option>
+                        <option value="code">Especialistas en Código</option>
+                        <option value="creative">Escritura Creativa / Roleplay</option>
+                        <option value="moderation">Modelos para Moderación</option>
+                    </optgroup>
+                    <optgroup label="Por Capacidad Técnica">
+                        <option value="tools">Soporte para Herramientas</option>
+                        <option value="web-search">Búsqueda Web</option>
+                        <option value="rag">Optimizados para RAG</option>
+                        <option value="structured-output">Salida Estructurada (JSON)</option>
+                        <option value="moe">Arquitectura MoE</option>
+                    </optgroup>
+                </select>
+            </div>
+            <div class="control-group">
+                <label for="sortSelect">Ordenar por:</label>
+                <select id="sortSelect">
+                    <option value="created-desc">Más Recientes Primero</option>
+                    <option value="prompt_price-asc">Precio Entrada (Más Barato)</option>
+                    <option value="prompt_price-desc">Precio Entrada (Más Caro)</option>
+                    <option value="completion_price-asc">Precio Salida (Más Barato)</option>
+                    <option value="completion_price-desc">Precio Salida (Más Caro)</option>
+                    <option value="context_length-desc">Contexto (Mayor a Menor)</option>
+                    <option value="max_completion_tokens-desc">Salida Máxima (Mayor a Menor)</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <label for="moderationSelect">Moderación:</label>
+                <select id="moderationSelect">
+                    <option value="all">Todos</option>
+                    <option value="moderated">Solo Moderados</option>
+                    <option value="unmoderated">Solo No Moderados</option>
+                </select>
+            </div>    
+            <div class="control-group">
+                <div class="checkbox-control">
+                    <!-- ID CORREGIDO PARA COINCIDIR CON LÓGICA Y ETIQUETA -->
+                    <input type="checkbox" id="showZDRCheckbox"> 
+                    <label for="showZDRCheckbox">Solo Modelos Zero Data Retention (ZDR)</label>
+                </div>
+            </div>
+        </div>
+        <main>
+            <p id="status-message">Cargando modelos desde ChatsBots.ES...</p>
+            <div id="models-container"></div>
+        </main>
+    </div>
+    
+    <script src="./assets/js/chatsbotses.js"></script>
+<script>
+// Nueva lógica migrada para ZDR
+const ALL_MODELS_URL = 'https://openrouter.ai/api/v1/models';
+const ZDR_MODELS_URL = 'https://openrouter.ai/api/v1/endpoints/zdr';
+
+const container = document.getElementById('models-container');
+const statusMessage = document.getElementById('status-message');
+const mainTitle = document.getElementById('main-title');
+const showZDRCheckbox = document.getElementById('showZDRCheckbox');
+const sortSelect = document.getElementById('sortSelect');
+const typeSelect = document.getElementById('typeSelect');
+const moderationSelect = document.getElementById('moderationSelect');
+const searchInput = document.getElementById('searchInput');
+let allModels = [];
+let searchTerm = '';
+let debounceTimer;
+let zdrModelIds = new Set();
+let zdrProviderData = new Map();
+
+const formatters = {
+    price: (v, u = 'tokens') => {
+        const n = parseFloat(v);
+        if (isNaN(n)) return 'N/A';
+        if (n === 0) return 'Gratis';
+        const precioFinal = n * 1.5; // Margen del 50%
+        const r = u === 'tokens' ? (precioFinal * 1e6).toFixed(4) : precioFinal.toFixed(6);
+        return `$${parseFloat(r)} / ${u === 'tokens' ? '1M tokens' : u}`;
+    },
+    tokens: (v) => {
+        if (typeof v !== 'number' || v <= 0) return 'N/A';
+        return v.toLocaleString('es-ES') + ' tokens';
+    },
+    fullDate: t => new Intl.DateTimeFormat('es-ES', { dateStyle: 'long' }).format(new Date(t * 1000)),
+    capitalize: s => s ? s.charAt(0).toUpperCase() + s.slice(1) : 'N/A'  // Corregido: era 'str' en lugar de 's'
+};
+
+function filterModelsByType(models, type) {
+    switch (type) {
+        case 'all': return models;
+        case 'text-only': return models.filter(m => m.architecture?.input_modalities?.length === 1 && m.architecture.input_modalities[0] === 'text');
+        case 'multimodal': return models.filter(m => m.architecture?.input_modalities?.includes('image'));
+        case 'image-generation': return models.filter(m => m.architecture?.output_modalities?.includes('image'));
+        case 'audio-capable': return models.filter(m => m.architecture?.input_modalities?.includes('audio'));
+        case 'reasoning': return models.filter(m => m.supported_parameters?.some(p => ['reasoning', 'include_reasoning'].includes(p)) || /reasoning|thinking|prover|logic/i.test(m.description));
+        case 'code': return models.filter(m => /code|coder|codex|devstral|swe-bench|humaneval|codestral/i.test(m.name) || /code|coder|codex|devstral|swe-bench|humaneval|codestral/i.test(m.description));
+        case 'creative': return models.filter(m => /roleplay|story|creative|narrative|anubis|euryale|midnight|magnum|lumimaid|rocinante/i.test(m.name) || /roleplay|story|creative|narrative/i.test(m.description));
+        case 'moderation': return models.filter(m => /guard|safety|moderation|classify content/i.test(m.name) || /guard|safety|moderation|classify content/i.test(m.description));
+        case 'tools': return models.filter(m => m.supported_parameters?.some(p => ['tools', 'tool_choice'].includes(p)));
+        case 'web-search': return models.filter(m => parseFloat(m.pricing?.web_search) > 0 || m.supported_parameters?.includes('web_search_options') || /web search|deep research/i.test(m.description));
+        case 'rag': return models.filter(m => /(RAG|retrieval-augmented|retrieval systems)/i.test(m.description));
+        case 'structured-output': return models.filter(m => m.supported_parameters?.includes('structured_outputs'));
+        case 'moe': return models.filter(m => /Mixture-of-Experts|MoE/i.test(m.description));
+        default: return models;
+    }
+}
+
+function createModelElement(model) {
+    const item = document.createElement('li');
+    item.className = 'model-item';
+    const summary = document.createElement('div');
+    summary.className = 'model-summary';
+    const nameWrapper = document.createElement('div');
+    nameWrapper.className = 'model-name-wrapper';
+    nameWrapper.title = 'Hacer clic para copiar ID del modelo';
+    const nameSpan = document.createElement('span');
+    nameSpan.className = 'model-name';
+    nameSpan.textContent = model.name;
+    const copyIcon = document.createElement('span');
+    copyIcon.className = 'copy-icon';
+    copyIcon.innerHTML = `<svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"></path></svg>`;
+    nameWrapper.appendChild(nameSpan);
+    nameWrapper.appendChild(copyIcon);
+    const summaryRight = document.createElement('div');
+    summaryRight.className = 'summary-right-section';
+    const sortProperty = sortSelect.value.split('-')[0];
+    if (sortSelect.value !== 'created-desc') {
+        const metric = document.createElement('span');
+        metric.className = 'sort-metric';
+        let metricValue = '';
+        switch (sortProperty) {
+            case 'prompt_price': metricValue = formatters.price(model.pricing?.prompt); break;
+            case 'completion_price': metricValue = formatters.price(model.pricing?.completion); break;
+            case 'context_length': metricValue = formatters.tokens(model.context_length); break;
+            case 'max_completion_tokens': metricValue = formatters.tokens(model.top_provider?.max_completion_tokens); break;
+        }
+        metric.textContent = metricValue;
+        summaryRight.appendChild(metric);
+    }
+    const summaryIcons = document.createElement('div');
+    summaryIcons.className = 'summary-icons';
+    if (model.architecture?.input_modalities?.includes('image')) summaryIcons.innerHTML += `<span title="Capacidad de Visión (Entrada)">👁️</span>`;
+    if (model.architecture?.output_modalities?.includes('image')) summaryIcons.innerHTML += `<span title="Generación de Imágenes (Salida)">🎨</span>`;
+    if (model.architecture?.input_modalities?.includes('audio')) summaryIcons.innerHTML += `<span title="Capacidad de Audio (Entrada)">🎧</span>`;
+    if (model.supported_parameters?.some(p => ['reasoning', 'include_reasoning'].includes(p))) summaryIcons.innerHTML += `<span title="Capacidad de Razonamiento">🧠</span>`;
+    if (parseFloat(model.pricing?.web_search || 0) > 0 || model.supported_parameters?.includes('web_search_options')) summaryIcons.innerHTML += `<span title="Capacidad de Búsqueda Web">🌐</span>`;
+    if (model.supported_parameters?.some(p => ['tools', 'tool_choice'].includes(p))) summaryIcons.innerHTML += `<span title="Soporte para Herramientas">🛠️</span>`;
+    if (zdrModelIds.has(model.id)) summaryIcons.innerHTML += `<span title="Zero Data Retention (ZDR)">🛡️</span>`;
+    if (summaryIcons.innerHTML) {
+        summaryRight.appendChild(summaryIcons);
+    }
+    summary.appendChild(nameWrapper);
+    summary.appendChild(summaryRight);
+    const details = document.createElement('div');
+    details.className = 'model-details';
+    const providerName = zdrProviderData.get(model.id) || model.top_provider?.name || 'Con procesamiento persistente';
+    const hfLink = model.hugging_face_id ? `<span><strong>Ficha Técnica:</strong> <a href="https://huggingface.co/${model.hugging_face_id}" target="_blank" rel="noopener noreferrer">${model.hugging_face_id}</a></span>` : '';
+    const orLink = model.canonical_slug ? `<span><strong>Página del Modelo:</strong> <a href="https://openrouter.ai/models/${model.canonical_slug}" target="_blank" rel="noopener noreferrer">Ver en OpenRouter</a></span>` : '';
+    const instructType = model.architecture?.instruct_type ? `<span><strong>Formato Instrucción:</strong> ${model.architecture.instruct_type}</span>` : '';
+    let pricingDetailsHTML = '';
+    if (parseFloat(model.pricing?.image || 0) > 0) pricingDetailsHTML += `<span><strong>Precio por Imagen:</strong> ${formatters.price(model.pricing.image, 'imagen')}</span>`;
+    if (parseFloat(model.pricing?.internal_reasoning || 0) > 0) pricingDetailsHTML += `<span><strong>Precio Razonamiento:</strong> ${formatters.price(model.pricing.internal_reasoning)}</span>`;
+    if (parseFloat(model.pricing?.web_search || 0) > 0) pricingDetailsHTML += `<span><strong>Precio Búsqueda Web:</strong> ${formatters.price(model.pricing.web_search, 'búsqueda')}</span>`;
+    details.innerHTML = `<div class="detail-grid"><span><strong>ID del Modelo:</strong> ${model.id}</span><span><strong>Proveedor:</strong> ${providerName}</span><span><strong>Lanzado el:</strong> ${formatters.fullDate(model.created)}</span><span><strong>Contexto:</strong> ${formatters.tokens(model.context_length)}</span><span><strong>Salida Máxima:</strong> ${formatters.tokens(model.top_provider?.max_completion_tokens)}</span><span><strong>Moderado:</strong> ${model.top_provider?.is_moderated ? 'Sí' : 'No'}</span><span><strong>Tokenizer:</strong> ${model.architecture?.tokenizer || 'N/A'}</span>${instructType}<span><strong>Entradas:</strong> ${formatters.capitalize(model.architecture?.input_modalities?.join(', '))}</span><span><strong>Salidas:</strong> ${formatters.capitalize(model.architecture?.output_modalities?.join(', '))}</span>${orLink}${hfLink}<hr style="grid-column: 1 / -1; border: 0; border-top: 1px dashed var(--border-color); margin: 5px 0;"><span><strong>Precio Entrada:</strong> ${formatters.price(model.pricing?.prompt)}</span><span><strong>Precio Salida:</strong> ${formatters.price(model.pricing?.completion)}</span>${pricingDetailsHTML}</div>`;
+    item.appendChild(summary);
+    item.appendChild(details);
+    nameWrapper.addEventListener('click', (e) => {
+        e.stopPropagation();
+        navigator.clipboard.writeText(model.id).then(() => {
+            if (!nameWrapper.classList.contains('copied')) {
+                nameWrapper.classList.add('copied');
+                setTimeout(() => nameWrapper.classList.remove('copied'), 1500);
+            }
+        }).catch(err => console.error('Error al copiar al portapapeles:', err));
+    });
+    summary.addEventListener('click', () => details.classList.toggle('expanded'));
+    return item;
+}
+
+function renderDisplay(models, sortBy) {
+    container.innerHTML = '';
+    if (models.length === 0) {
+        statusMessage.style.display = 'block';
+        statusMessage.textContent = 'No se encontraron modelos con los filtros seleccionados.';
+        return;
+    }
+    statusMessage.style.display = 'none';
+    if (sortBy === 'created-desc') {
+        const grouped = models.reduce((acc, m) => {
+            const date = new Date(m.created * 1000);
+            const key = new Intl.DateTimeFormat('es-ES', { month: 'long', year: 'numeric' }).format(date).replace(/^\w/, c => c.toUpperCase());
+            if (!acc[key]) acc[key] = [];
+            acc[key].push(m);
+            return acc;
+        }, {});
+        const sortedGroupKeys = Object.keys(grouped).sort((a, b) => {
+            const dateA = new Date(grouped[a][0].created * 1000);
+            const dateB = new Date(grouped[b][0].created * 1000);
+            return dateB - dateA;
+        });
+        for (const groupName of sortedGroupKeys) {
+            const header = document.createElement('h2');
+            header.className = 'group-header';
+            header.textContent = groupName;
+            container.appendChild(header);
+            const list = document.createElement('ul');
+            list.className = 'model-list';
+            grouped[groupName].forEach(model => list.appendChild(createModelElement(model)));
+            container.appendChild(list);
+        }
+    } else {
+        const list = document.createElement('ul');
+        list.className = 'model-list';
+        models.forEach(model => list.appendChild(createModelElement(model)));
+        container.appendChild(list);
+    }
+}
+
+function updateDisplay() {
+    let processedModels = [...allModels];
+
+    // Nuevo filtro ZDR condicional
+    if (showZDRCheckbox.checked) {
+        processedModels = processedModels.filter(m => zdrModelIds.has(m.id));
+    }
+
+    processedModels = filterModelsByType(processedModels, typeSelect.value);
+
+    // FILTRO HARDCODEADO DE CHATSBOTSES: Ocultar siempre modelos gratuitos
+    processedModels = processedModels.filter(m => !(parseFloat(m.pricing?.prompt || 0) === 0 && parseFloat(m.pricing?.completion || 0) === 0));
+
+    const moderationFilter = moderationSelect.value;
+    if (moderationFilter !== 'all') {
+        processedModels = processedModels.filter(m => {
+            const isModerated = m.top_provider?.is_moderated === true;
+            return (moderationFilter === 'moderated') ? isModerated : !isModerated;
+        });
+    }
+    if (searchTerm.trim() !== '') {
+    const term = searchTerm.trim().toLowerCase();
+    processedModels = processedModels.filter(m => 
+        (m.name && m.name.toLowerCase().includes(term)) || 
+        (m.id && m.id.toLowerCase().includes(term)) ||
+        (zdrModelIds.has(m.id) && zdrProviderData.get(m.id)?.toLowerCase().includes(term)) ||  
+        (m.top_provider?.name && m.top_provider.name.toLowerCase().includes(term))  
+    );
+}
+
+    mainTitle.textContent = `${processedModels.length} modelos LLM que ofrece ChatsBotsES`;
+
+    const [property, order] = sortSelect.value.split('-');
+    processedModels.sort((a, b) => {
+        let valA, valB;
+        const asc = order === 'asc';
+        if (property === 'created') {
+            valA = a.created;
+            valB = b.created;
+            return order === 'desc' ? valB - valA : valA - valB;
+        }
+        if (property === 'max_completion_tokens') {
+            valA = a.top_provider?.max_completion_tokens ?? (asc ? Infinity : -1);
+            valB = b.top_provider?.max_completion_tokens ?? (asc ? Infinity : -1);
+        } else if (property.includes('price')) {
+            const priceKey = property.split('_')[0];
+            valA = parseFloat(a.pricing?.[priceKey] || (asc ? Infinity : -1)) * 1.5;
+            valB = parseFloat(b.pricing?.[priceKey] || (asc ? Infinity : -1)) * 1.5;
+        } else {
+            valA = a[property] ?? (asc ? Infinity : -1);
+            valB = b[property] ?? (asc ? Infinity : -1);
+        }
+        return asc ? valA - valB : valB - valA;
+    });
+
+    renderDisplay(processedModels, sortSelect.value);
+}
+
+function showError(message) {
+    statusMessage.style.display = 'block';
+    statusMessage.style.color = 'var(--error-color)';
+    statusMessage.innerHTML = `<div class="error-message"><p>${message}</p><button class="retry-button" onclick="location.reload()">Reintentar</button></div>`;
+}
+
+async function fetchModels() {
+    try {
+        statusMessage.textContent = 'Cargando y cruzando datos de modelos...';
+
+        const [allModelsResponse, zdrModelsResponse] = await Promise.all([
+            fetch(ALL_MODELS_URL),
+            fetch(ZDR_MODELS_URL)
+        ]);
+
+        if (!allModelsResponse.ok || !zdrModelsResponse.ok) {
+            throw new Error(`Error en API: General=${allModelsResponse.status}, ZDR=${zdrModelsResponse.status}`);
+        }
+
+        const allModelsData = await allModelsResponse.json();
+        const zdrModelsData = await zdrModelsResponse.json();
+
+        // MODIFICADO: Guardamos los datos de la API ZDR
+        if (zdrModelsData.data && Array.isArray(zdrModelsData.data)) {
+            zdrModelsData.data.forEach(model => {
+                const modelId = (model.name.split(' | ')[1] || model.name);
+                zdrModelIds.add(modelId);
+                zdrProviderData.set(modelId, model.provider_name);
+            });
+        }
+
+        // Guardamos TODOS los modelos, el filtrado se hace en updateDisplay()
+        allModels = (allModelsData.data || []).filter(m => m.id !== 'openrouter/auto');
+
+        updateDisplay();
+
+    } catch (error) {
+        console.error('Error al obtener y cruzar los modelos:', error);
+        showError('Hubo un problema al conectar con las APIs. Por favor, inténtalo de nuevo.');
+        mainTitle.textContent = 'Error al cargar modelos desde ChatsBotsES';
+    }
+}
+
+function setupEventListeners() {
+    // MODIFICADO: El checkbox de ZDR tiene su listener
+    [showZDRCheckbox, sortSelect, typeSelect, moderationSelect].forEach(el => {
+        if (el) el.addEventListener('change', updateDisplay);
+    });
+
+    if (searchInput) {
+        searchInput.addEventListener('input', () => {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => {
+                searchTerm = searchInput.value;
+                updateDisplay();
+            }, 300);
+        });
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    setupEventListeners();
+    fetchModels();
+});
+</script>
+</body>
+</html>
