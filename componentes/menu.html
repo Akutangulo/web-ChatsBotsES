@@ -3,693 +3,1100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modelos LLM disponibles en ChatsBotsES - Akutangulo</title>
-    <meta name="description" content="Explora y compara los modelos LLM disponibles en ChatsBotsES. Filtra por tipo, coste y capacidades.">
-    <link rel="stylesheet" href="./assets/css/chatsbotses.css">
+    <title>Inicio ChatsBotsES</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🤖</text></svg>">
 
-    <style>
-/* Variables Globales */
+<!-- Open Graph básico -->
+<meta property="og:title" content="Modelos LLM disponibles en ChatsBotsES - Akutangulo">
+<meta property="og:description" content="Explora, filtra y prueba modelos de IA en ChatsBotsES: texto, visión, imágenes, audio, código y más. Actualizado a diario.">
+<meta property="og:image" content="https://chatsbots.es/assets/images/modelos-inteligencia-artificial-akutangulo.png">
+<meta property="og:url" content="https://chatsbots.es/modelos-llm-chatsbotses.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ChatsBotsES">
+<meta property="og:locale" content="es_ES">
+<meta property="og:image:alt" content="Akutangulo en ChatsBotsES: nuevos modelos de Inteligencia Artificial, filtrados por tipo, especialidad y capacidades.">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+    <link rel="stylesheet" href="./assets/css/chatsbotses.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+@font-face {
+font-family: 'bauhouse_akutangulo';
+src: url('./assets/fonts/bauhouse_akutangulo.eot'); /* archivo EOT para IE */ 
+src: url('./assets/fonts/bauhouse_akutangulo.eot?#iefix') format('embedded-opentype'),
+url('./assets/fonts/bauhouse_akutangulo.ttf') format('truetype'); /* archivo TTF para navegadores CSS3 */ 
+}
+
 :root {
-    --primary-color: #9300D3; /* Color primario para encabezados y detalles */
-    --secondary-color: #0ff; /* Color secundario para efectos y enlaces */
-    --text-color: #f8f8f8; /* Color del texto por defecto */
-    --bg-color: #121212; /* Color de fondo oscuro */
-    --card-bg: #1E1E1E; /* Fondo de tarjeta oscuro */
-    --header-color: var(--primary-color); /* Color del encabezado principal */
-    --detail-color: #CCCCCC; /* Detalle de texto, generalmente gris claro */
-    --border-color: #333;
-    --shadow-color: rgba(0, 0, 0, 0.5);
-    --success-color: #2ecc71;
-    --error-color: #e74c3c;
+    /* Altura del botón (centralizada para cálculos) */
+    --btn-h: 50px; 
+    --btn-half: calc(var(--btn-h) / 2); /* translateZ coherente */
+
+    --color-akutangulo: #9300D3;
+    --color-chatsbotses: #0ff;
+    --color-menu: #7a00b3;
+    --primary: #8e24aa;
+    --secondary: #d500f9;
+    --light: #ea80fc;
+    --bg: #f9f0ff;
+    --text: #4a0072;
+    --hover-bg: #b388ff;
+    --color-cta: #00C2FF;
+    --color-transparente: rgba(245,247,255,0.3);
+    --bg-primary: #1e0b2d;
+    --bg-secondary: #31164a;
+    --bg-surface: #4a1d7d;
+    --text-primary: #e1b0ff;
+    --text-secondary: #b080e0;
+    --text-muted: #8a5ca9;
+    --accent-primary: #d500f9;
+    --accent-secondary: #a267ff;
+    --border: #5e3aad;
+    --color-sombra: #9300D3;
+    /* Redes Sociales */
+    --color-facebook: #3b5999;
+    --color-twitter: #55acee;
+    --color-telegram: #0088cc;
 }
 .tema-claro {
-    --text-color: #191919; /* Cambia el color del texto para modo claro */
-    --bg-color: #fafbfd; /* Fondo blanco para modo claro */
-    --card-bg: #CCCCCC; /* Fondo de tarjeta gris claro */
-    --header-color: #2c3e50; /* Color neutro para encabezado en modo claro */
-    --detail-color: #3f3f3f; /* Detalle de texto oscuro para contraste */
+    --bg-primary: #f9f4ff;
+    --bg-secondary: #f0e6ff;
+    --bg-surface: #e6d8ff;
+    --text-primary: #4a148c;
+    --text-secondary: #6a3d9a;
+    --text-muted: #9e7bcc;
+    --accent-primary: #8e24aa;
+    --accent-secondary: #ab47bc;
+    --border: #cbb8e6;
+    --color-sombra: #0ff;
 }
+
 body {
-    font-family: "Afacad Flux", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    transition: background-color 0.3s, color 0.3s;
+    margin: 0;
+    font-family: "Afacad Flux", sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text);
 }
-header {
-    text-align: center;
-    background-color: var(--primary-color);
-    color: var(--text-color);
+
+main {
     padding: 1rem;
 }
-h1, h2, h3 {
-    font-family: "Afacad Flux", sans-serif;
-    font-weight: 900; /* Grosor fuerte para destacar */
-    color: var(--header-color); /* Utiliza el color de texto primario */
-    transition: color 0.3s ease, text-shadow 0.3s ease; /* Transición para hover */
+
+/* ------------------------- */
+
+h1 {
+    font-size: 3rem;
+    padding: 0.1rem 3rem;
 }
-/* Estilización de h1 */
-h1#main-title {
-    font-size: 3rem; /* Tamaño destacado para h1 */
-    color: var(--primary-color); /* Color primario para h1 */
-    text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color); /* Efecto resplandor */
-    -webkit-text-stroke: 1px var(--secondary-color);
+h2 {
+    font-size: 2rem;
+    padding: 0.1rem 3rem;
 }
-h1#main-title:hover {
-    color: var(--secondary-color); /* Cambia a color secundario en hover */
-    text-shadow: 0 0 15px var(--secondary-color), 0 0 25px var(--secondary-color);
+h3 {
+    font-size: 1.5rem;
+    padding: 0.1rem 3rem;
 }
-/* Estilización de h2 */
-h2.group-header {
-    font-size: 2.5rem;
-    color: var(--primary-color); /* Consistencia en color de título */
-    text-shadow: 0 0 8px var(--primary-color), 0 0 12px var(--primary-color);
-}
-h2.group-header:hover {
-    color: var(--secondary-color);
-}
-.container {
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 0 20px;
-}
-header {
-    background-color: var(--primary-color);
-    color: var(--text-color);
-    text-align: center;
-    margin-bottom: 20px;
-    padding: 20px 0;
-}
-/* El buscador ocupa toda la fila y se separa del resto */
-#controls-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 5px 20px;
-    padding: 20px;
-    background-color: var(--card-bg);
-    border-radius: 8px;
-    margin-bottom: 30px;
-    box-shadow: 0 2px 4px var(--shadow-color);
-}
-/* Mejora para el buscador en pantallas grandes */
-.control-group:first-child {
-    grid-column: 1 / -1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 10px;
-}
-#searchInput {
-    width: 50%;
-    max-width: 100%;
-    padding: 10px 12px;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    font-size: 1em;
-    background-color: #fff;
-    color: #333;
-    box-sizing: border-box;
-    transition: width 0.2s;
-    margin-top: 5px;
-}
-/* En pantallas pequeñas, el buscador ocupa todo el ancho */
-@media (max-width: 700px) {
-    #searchInput {
-        width: 100%;
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+        padding: 0.1rem 1rem;
     }
-    #controls-container {
-        grid-template-columns: 1fr;
+    h2 {
+        font-size: 1.7rem;
+        padding: 0.1rem 1rem;
     }
-    .control-group select {
-        width: 100%;
-        box-sizing: border-box; 
+    h3 {
+        font-size: 1.3rem;
+        padding: 0.1rem 1rem;
     }
 }
-.control-group label {
-    font-weight: 500;
-    color: var(--text-color);
-}
-.control-group select {
-    width: 100%;
-    padding: 10px 12px;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    font-size: 1em;
-    background-color: #fff;
-    color: #333;
-}
-#status-message {
+
+footer {
+    background-color: var(--color-akutangulo);
+    color: var(--bg);
     text-align: center;
-    font-size: 1.2em;
-    color: var(--detail-color);
-    padding: 40px 0;
+    padding: 10px 20px;
+    margin-top: 20px;
+    font-size: 1.3rem;
 }
-#models-container {
-    padding: 0;
-    margin: 0;
+footer a {
+    color: var(--bg);
+    font-size: 1rem;
 }
-.group-header {
-    font-size: 1.5em;
-    font-weight: 500;
-    color: var(--primary-color);
-    margin-top: 40px;
-    margin-bottom: 15px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid var(--border-color);
+.footer {
+    padding: 1rem;
     text-align: center;
+    margin-bottom: 1.5rem;
 }
-.group-header:first-of-type {
-    margin-top: 0;
+.footer a {
+    text-decoration: none;
 }
-.model-list {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+.copyright {
+    color: var(--text-primary);
+    font-size: 1.2rem;
 }
-.model-item {
-    background-color: var(--card-bg);
-    margin-bottom: 12px;
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
-    box-shadow: 0 2px 4px var(--shadow-color);
-    transition: box-shadow 0.2s ease-in-out;
-}
-.model-summary {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px 22px;
-    cursor: pointer;
-}
-.model-name-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: copy;
-    position: relative;
-    padding: 5px;
-    margin: -5px;
-    border-radius: 5px;
-    transition: background-color 0.2s;
-}
-.model-name-wrapper:hover {
-    background-color: rgba(147, 0, 211, 0.1);
-}
-.model-name {
-    font-size: 1.1em;
-    font-weight: 600;
-    color: var(--header-color);
-    word-break: break-word;
-}
-.summary-right-section {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-.sort-metric {
-    font-size: 0.95em;
-    color: var(--detail-color);
-    background-color: var(--bg-color);
-    padding: 4px 10px;
-    border-radius: 12px;
-    white-space: nowrap;
-}
-.summary-icons {
-    display: flex;
-    gap: 8px;
-    font-size: 1.3em;
-}
-.summary-icons span {
-    cursor: help;
-}
-.model-details {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease-out, padding 0.4s ease-out;
-    padding: 0 22px;
-    font-size: 0.9em;
-}
-.model-details.expanded {
-    max-height: 500px;
-    padding: 16px 22px;
-    border-top: 1px solid var(--border-color);
-}
-.detail-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 10px 20px;
-}
-.detail-grid span {
-    display: flex;
-}
-.detail-grid strong {
+footer .icon {
+    padding: 0rem 0.3rem;
     display: inline-block;
-    width: 160px;
-    color: var(--text-color);
-    flex-shrink: 0;
+    position: relative;
+    top: 0.6rem;
 }
-.detail-grid a {
-    color: var(--secondary-color);
-    text-decoration: none;
-    word-break: break-all;
+.akutangulo-diseño-web-seo-ia {
+    font-family: 'bauhouse_akutangulo';
+    color: #9400D3;
+    animation: glow 10s ease-in-out infinite;
 }
-.detail-grid a:hover {
-    text-decoration: underline;
-}
-.detail-grid strong a {
-    color: var(--secondary-color);
-    font-weight: bold;
-}
-.detail-grid strong a:hover {
-    text-decoration: underline;
-}
-@media (max-width: 600px) {
-    h1#main-title {
-        font-size: 1.9em;
+
+
+
+
+
+
+
+
+
+
+    /*************************************************
+    * Contenedor
+    *************************************************/
+    .contenedor-botones-chatsbotses {
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:2rem;
+      padding:2rem;
+      margin:0 auto;
+      box-sizing:border-box;
     }
-    .container {
-        padding: 0 15px;
+
+    /*************************************************
+    * Botón (contenedor 3D)
+    *************************************************/
+    .boton-akutangulo {
+      cursor:pointer;
+      height: var(--btn-h);
+      width: 280px;            
+      perspective: 1000px;
+      display:block;
+      margin: 2rem auto;
+      -webkit-tap-highlight-color: transparent;
     }
-    .group-header {
-        font-size: 1.3em;
+
+    .boton-akutangulo:active{
+      transform: translateY(1px) scale(0.98); /* feedback click */
     }
-    .model-name {
-        font-size: 1em;
+
+    .flipper3d{
+      transition: transform 0.5s ease-in-out;
+      transform-style: preserve-3d;
+      position: relative;
+      /* origen en el borde derecho, vertical centrado según --btn-half */
+      transform-origin: 100% var(--btn-half);
+      width:100%;
+      height:100%;
     }
-    .model-summary {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
+
+    /* Soporte para teclado/touch: focus-within activa el flip igual que hover */
+    .boton-akutangulo:focus-within .flipper3d { outline: none; }
+
+    /*************************************************
+    * Caras del botón (misma placa para front/back)
+    *************************************************/
+    .boton-aku{
+      height:100%;
+      width:100%;
+      backface-visibility: hidden;
+      position:absolute;
+      top:0;
+      left:0;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      box-shadow: 1px 2px 4px -1px rgba(60,60,60,0.64);
+      background: linear-gradient(90deg, var(--color-akutangulo) 0%, var(--color-chatsbotses) 50%, var(--color-cta) 100%);
+      background-size: 200% 100%;
+      padding:5px;
+      box-sizing: border-box;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background-position 0.8s ease;
+      animation: gradient-animation 5s ease infinite;
+      color: var(--color-texto-botones);
+      text-align:center;
+      overflow: visible; /* permitimos overflow del icono grande (intencionado) */
     }
+
+    @keyframes gradient-animation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* FRONTAL: la placa y el icono grande */
+    .front{
+      transform: translateZ(var(--btn-half));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    /* TRASERA: texto (se orienta según variante up/down abajo) */
+    .back {
+      color: #212121;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      line-height: 1.4;
+      display:flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      white-space: normal;
+      word-break: break-word;
+      padding: 4px;
+    }
+
+    /* Efecto up (entra desde arriba): back preparado */
+    .boton-akutangulo-flip3d-up .back {
+      transform: rotateX(90deg) translateZ(var(--btn-half));
+    }
+    /* Hover / focus -> gira -90deg para up */
+    .boton-akutangulo-flip3d-up:hover .flipper3d,
+    .boton-akutangulo-flip3d-up:focus-within .flipper3d {
+      transform: rotateX(-90deg);
+    }
+
+    /* Efecto down (entra desde abajo): back preparado y orientado para leerse bien */
+    .boton-akutangulo-flip3d-down .back {
+      transform: rotateX(90deg) rotateZ(180deg) rotateY(180deg) translateZ(var(--btn-half));
+    }
+    /* Hover / focus -> gira +90deg para down */
+    .boton-akutangulo-flip3d-down:hover .flipper3d,
+    .boton-akutangulo-flip3d-down:focus-within .flipper3d {
+      transform: rotateX(90deg);
+    }
+
+    /*************************************************
+    * Iconos (con tamaño intencionalmente grande)
+    *************************************************/
+    .iconos-botones-sociales {
+      font-size: 7em; 
+      color: var(--color-akutangulo);
+      margin: 0 0 5px 0;
+      line-height: 1;
+      display: block;
+      -webkit-text-stroke: 1px var(--color-transparente);
+      text-rendering: optimizeLegibility;
+      pointer-events: none; /* el icono no debe capturar el pointer */
+    }
+
+    .iconos-botones-sociales.telegram { color: var(--color-telegram); }
+    .iconos-botones-sociales.fa-twitter { color: var(--color-twitter); }
+    .iconos-botones-sociales.fa-facebook-square { color: var(--color-facebook); }
+
+    /*************************************************
+    * Responsive 
+    *************************************************/
+    @media (max-width: 1024px) {
+      .contenedor-botones-chatsbotses { gap:1rem; padding:1.5rem; }
+      .boton-akutangulo { width: 260px; }
+    }
+    @media (max-width: 768px) {
+      .boton-akutangulo { width: 240px; }
+    }
+
+    
+/* ===== EFECTOS ===== */
+.pulse {
+  box-shadow: 0 0 0 0 rgb(0, 255, 255);
+  cursor: pointer;
+  animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
 }
-/* Extra */
-.data-source-link {
-    margin: 10px 0 0 0;
-    font-size: 0.9em;
-    color: var(--detail-color);
-    font-weight: 400;
+
+.pulse:hover {
+  animation: none;
 }
-.data-source-link a {
-    color: var(--secondary-color);
-    text-decoration: none;
-    font-weight: 500;
+
+@keyframes pulse {
+  to {
+    box-shadow: 0 0 0 10px rgba(232, 76, 61, 0);
+  }
 }
-.data-source-link a:hover {
-    text-decoration: underline;
+
+@keyframes neon-color-change {
+  0%,
+  100% {
+    color: #0ff;
+  }
+
+  25% {
+    color: #f0f;
+  }
+
+  50% {
+    color: #ff0;
+  }
+
+  75% {
+    color: #0f0;
+  }
 }
-.checkbox-control {
+
+.neon-text {
+  font-weight: 900;
+  animation: neon-color-change 30s infinite;
+  transition: all 0.5s ease-in-out;
+  -webkit-text-stroke: 1px var(--text);
+}
+
+.neon-text:hover {
+  animation: none;
+  color: var(--color-chatsbotses);
+  text-shadow: 0 0 10px var(--color-chatsbotses);
+}
+
+
+/******************************************
+/* ===== NAVBAR GENERAL ===== */
+.navbar {
+  background-color: var(--color-akutangulo);
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  flex-wrap: wrap;
+  z-index: 1001;
+  margin: -5px 0 0 0;
+}
+
+.propmts-ia {
+  background-color: var(--color-menu);
+  display: flex;
+  justify-content: space-between;
+  padding: 0.6rem;
+}
+
+/* ===== MARCA ===== */
+.brand-chatsbotses {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--bg);
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.brand-chatsbotses a {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.brand-chatsbotses .icon {
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.brand-chatsbotses .marca {
+  display: inline-block;
+  font-size: 2.3rem;
+}
+
+/* ===== MENÚ PRINCIPAL ===== */
+.menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.menu li {
+  position: relative;
+}
+
+.menu li:hover {
+  background-color: var(--primary);
+  border-radius: 8px;
+}
+
+.menu a {
+  text-decoration: none;
+  color: var(--bg);
+  display: block;
+  border-radius: 10px;
+  transition: background-color 0.3s, color 0.3s;
+  font-size: 1.3rem;
+  white-space: nowrap;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Li sin submenu (Inicio, LLM, Precios, Contacto) */
+.menu > li:not(.has-submenu) > a {
+    padding: 0.5rem 1rem;
+}
+
+/* ===== SUBMENÚ ===== */
+.has-submenu {
+  position: relative;
+}
+
+.menu-item-wrapper { 
     display: flex;
     align-items: center;
+    padding: 0.5rem 1rem; 
 }
-.checkbox-control input {
-    margin-right: 8px;
+
+.menu-item-wrapper > a {
+    padding: 0; 
+    flex-grow: 1; 
 }
-.error-message {
-    color: var(--error-color); text-align: center; padding: 20px; background-color: rgba(231, 76, 60, 0.1); border-radius: 8px; border-left: 4px solid var(--error-color);
+
+.submenu-toggle { 
+  background: none;
+  border: none;
+  color: var(--bg);
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-left: 0.3rem;
+  transition: transform 0.3s ease;
+  padding: 0.3rem;
+  line-height: 1;
 }
-.retry-button {
-    margin-top: 10px; padding: 8px 16px; background-color: var(--error-color); color: white; border: none; border-radius: 4px; cursor: pointer;
+
+.has-submenu.open .submenu-toggle {
+  transform: rotate(180deg);
 }
+
+.submenu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: var(--color-menu);
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.3s ease, opacity 0.3s ease, visibility 0.3s 0.3s;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  visibility: hidden;
+}
+
+.has-submenu.open .submenu {
+  max-height: fit-content;
+  opacity: 1;
+  visibility: visible;
+  padding: 0.5rem 1rem;
+}
+
+.submenu li a {
+  padding: 0.4rem 0.5rem;
+  font-size: 1.1rem;
+  display: block;
+}
+
+/* **NUEVO CSS para UX de ESCRITORIO (Focus-within/Hover)** */
+@media (min-width: 769px) { 
+    /* Abrir submenú al pasar el ratón o al navegar con el teclado */
+    .has-submenu:hover .submenu,
+    .has-submenu:focus-within .submenu {
+        max-height: fit-content;
+        opacity: 1;
+        visibility: visible;
+        padding: 0.5rem 1rem;
+        /* La transición de visibilidad es casi inmediata para abrir, pero se retrasa para cerrar (por defecto) */
+        transition: max-height 0.3s ease, opacity 0.3s ease, visibility 0s; 
+    }
+    
+    /* Girar la flecha al abrir por hover/focus-within */
+    .has-submenu:hover .submenu-toggle,
+    .has-submenu:focus-within .submenu-toggle {
+        transform: rotate(180deg);
+    }
+    
+}
+
+
+/* ===== HAMBURGUESA ===== */
+.hamburger {
+  display: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: var(--bg);
+  background: none;
+  border: none;
+  padding: 0.5rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0.5rem;
+  }
+
+  .menu a {
+    white-space: normal;
+  }
+
+  .menu {
+    flex-direction: column;
+    position: absolute;
+    top: 200%;
+    left: 0;
+    width: 100%;
+    background-color: var(--color-menu);
+    z-index: 999;
+    max-height: 0;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: max-height 0.6s ease, opacity 0.6s ease, visibility 0.6s 0.6s, transform 0.6s ease;
+    overflow-y: auto;
+    transform: translateY(-100px);  
+  }
+
+  .menu.active {
+    max-height: 150vh;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: max-height 0.6s ease, opacity 0.6s ease, visibility 0s, transform 0.6s ease;
+    top: 200%;  
+    transform: translateY(0);  
+  }
+
+  .menu li {
+    width: 100%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .menu li:last-child {
+    border-bottom: none;
+  }
+
+  .menu-item-wrapper {
+    display: flex; 
+    align-items: center; 
+    padding: 0; 
+    width: 100%;
+  }
+
+  .menu-item-wrapper > a {
+    padding: 0.8rem 1rem; 
+    flex: 1; 
+  }
+
+  .submenu-toggle {
+    margin-left: auto;
+    font-size: 1rem;
+    padding: 0.8rem 1.5rem; /* Asegurar área de click grande y alineación */
+  }
+
+  .submenu {
+    position: static;
+    background-color: rgba(0, 0, 0, 0.2);
+    box-shadow: none;
+    width: 90%;
+    padding: 0;
+    max-height: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+  }
+
+  .has-submenu.open .submenu {
+    margin: 0.5rem 1rem;
+    padding: 0.5rem 0;
+    max-height: 500px;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .submenu li {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .submenu li:last-child {
+    border-bottom: none;
+  }
+
+  .submenu li a {
+    padding: 0.8rem 1.5rem;
+    border-top: none;
+    font-size: 1rem;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  iframe.presentacion-chatsbotses {
+    height: 380px;
+  }
+}
+
+@media (max-width: 480px) {
+  .brand-chatsbotses {
+    font-size: 1.8rem;
+  }
+
+  .brand-chatsbotses .marca {
+    font-size: 1.8rem;
+  }
+
+  .navbar {
+    padding: 0.5rem;
+  }
+
+  iframe.presentacion-chatsbotses {
+    height: 250px;
+  }
+}
+
+/* ===== OTROS ELEMENTOS ===== */
+
+iframe.presentacion-chatsbotses {
+    width: 100%;
+    height: 480px;
+    border: none;
+}
+
+@media (max-width: 768px) {
+    iframe.presentacion-chatsbotses {
+        height: 350px;
+    }
+}
+
+@media (max-width: 480px) {
+    iframe.presentacion-chatsbotses {
+        height: 250px;
+    }
+}
+
+
+/* ===== CTA BUTTON ===== */
+.cta-button {
+  background-color: var(--color-chatsbotses);
+  padding: 0.5rem 1rem;
+  margin: 0.3rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  color: #121212;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+}
+
     </style>
 </head>
 <body>
-<button class="theme-toggle" onclick="toggleTheme()" aria-label="Cambiar tema de color">🌓</button>
-<iframe src="./assets/robot-chatbot.html" width="100%" height="500px" style="border: none;" title="Chatsbotses Inteligentes - Soluciones de chatbots con inteligencia artificial para tu empresa o negocio"></iframe>
-<header>
-    <h1 class="chatsbotses neon-text"><span class="emoji-logo">🤖</span> ChatsBots.es</h1>
-    <button class="menu-hamburguesa" id="menu-hamburguesa" onclick="toggleMenu()" aria-expanded="false" aria-controls="nav" title="menu ChatsBotsES">
-    <i class="fas fa-bars"></i>
-</button>
-    <nav id="nav">
-        <a href="index.html">Inicio</a>
-        <a href="./index.html#caracteristicas">Características</a>
-        <a href="./index.html#precios">Precios</a>
-        <a href="#">Modelos LLM</a>
-        <a href="./index.html#contacto" class="btn-contacto">Contacto</a>
-    </nav>
-</header>
-    <div class="container">
-        <h1 id="main-title">Modelos LLM disponibles en ChatsBotsES</h1>
-            <p class="data-source-link">
-            Clasificación de modelos por <a href="https://lmarena.ai/leaderboard" target="_blank" rel="noopener noreferrer">LMArena.ai</a>
-            </p>
-<div id="controls-container">
-    <div class="control-group">
-        <label for="searchInput">Buscar modelo por nombre o ID:</label>
-        <input type="search" id="searchInput" placeholder="GPT-5, openai/gpt-5">
+    <header>
+        <iframe class="presentacion-chatsbotses" src="./assets/robot-chatbot.html" title="Chatsbotses Inteligentes - Soluciones de chatbots y automatizaciones con inteligencia artificial para tu empresa o negocio"></iframe>
         
+  <nav class="navbar">
+    <div class="brand-chatsbotses">
+      <a href="#inicio">
+        <span class="icon"><icono-chatsbotses size="50px"></icono-chatsbotses></span>
+        <span class="marca neon-text">ChatsBots.ES</span>
+      </a>
     </div>
-            <div class="control-group">
-                
-                <label for="typeSelect">Tipo de Modelo:</label>
-                <select id="typeSelect">
-                    <!-- HTML ACTUALIZADO SOLO AQUÍ -->
-                    <option value="all">Todos los Modelos</option>
-                    <optgroup label="Por Modalidad">
-                        <option value="text-only">Texto a Texto</option>
-                        <option value="multimodal">Multimodal (Visión)</option>
-                        <option value="image-generation">Generación de Imágenes</option>
-                        <option value="audio-capable">Capacidad de Audio</option>
-                    </optgroup>
-                    <optgroup label="Por Especialización">
-                        <option value="reasoning">Especialistas en Razonamiento</option>
-                        <option value="code">Especialistas en Código</option>
-                        <option value="creative">Escritura Creativa / Roleplay</option>
-                        <option value="moderation">Modelos para Moderación</option>
-                    </optgroup>
-                    <optgroup label="Por Capacidad Técnica">
-                        <option value="tools">Soporte para Herramientas</option>
-                        <option value="web-search">Búsqueda Web</option>
-                        <option value="rag">Optimizados para RAG</option>
-                        <option value="structured-output">Salida Estructurada (JSON)</option>
-                        <option value="moe">Arquitectura MoE</option>
-                    </optgroup>
-                </select>
-            </div>
-            <div class="control-group">
-                <label for="sortSelect">Ordenar por:</label>
-                <select id="sortSelect">
-                    <option value="created-desc">Más Recientes Primero</option>
-                    <option value="prompt_price-asc">Precio Entrada (Más Barato)</option>
-                    <option value="prompt_price-desc">Precio Entrada (Más Caro)</option>
-                    <option value="completion_price-asc">Precio Salida (Más Barato)</option>
-                    <option value="completion_price-desc">Precio Salida (Más Caro)</option>
-                    <option value="context_length-desc">Contexto (Mayor a Menor)</option>
-                    <option value="max_completion_tokens-desc">Salida Máxima (Mayor a Menor)</option>
-                </select>
-            </div>
-            
-            <div class="control-group">
-                <label for="moderationSelect">Moderación:</label>
-                <select id="moderationSelect">
-                    <option value="all">Todos</option>
-                    <option value="moderated">Solo Moderados</option>
-                    <option value="unmoderated">Solo No Moderados</option>
-                </select>
-            </div>    
-            <div class="control-group">
-                <div class="checkbox-control">
-                    <!-- ID CORREGIDO PARA COINCIDIR CON LÓGICA Y ETIQUETA -->
-                    <input type="checkbox" id="showZDRCheckbox"> 
-                    <label for="showZDRCheckbox">Solo Modelos Zero Data Retention (ZDR)</label>
-                </div>
-            </div>
+
+    <button class="hamburger" id="hamburger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu">☰</button>
+    <ul class="menu" id="menu"> 
+      <!-- Enlace simple -->
+      <li><a href="#inicio">Inicio</a></li>
+
+      <!-- Enlace con Submenú-->
+      <li class="has-submenu">
+        <div class="menu-item-wrapper">
+            <a href="#chatbots">Chatbots IA</a>
+            <button class="submenu-toggle" type="button" aria-label="Alternar submenú de Chatbots IA" aria-expanded="false" aria-controls="submenu-chatbots">
+                <span aria-hidden="true">▼</span>
+            </button>
         </div>
-        <main>
-            <p id="status-message">Cargando modelos desde ChatsBots.ES...</p>
-            <div id="models-container"></div>
-        </main>
-    </div>
+        <ul class="submenu" id="submenu-chatbots">
+          <li><a href="#chatbots">Ver todos los Chatbots IA</a></li>
+          <li><a href="#chatbots-atencion-cliente">Atención al cliente 24/7</a></li>
+          <li><a href="#chatbots-internos">Para empleados</a></li>
+          <li><a href="#chatbots-ia-generativa">Con IA generativa</a></li>
+          <li><a href="#memoria-rag">Memoria RAG / Contexto</a></li>
+        </ul>
+      </li>
+
+      <!-- Enlace con Submenú -->
+      <li class="has-submenu">
+        <div class="menu-item-wrapper">
+            <a href="#agentes-ia">Agentes IA</a>
+            <button class="submenu-toggle" type="button" aria-label="Alternar submenú de Agentes IA" aria-expanded="false" aria-controls="submenu-agentes">
+                <span aria-hidden="true">▼</span>
+            </button>
+        </div>
+        <ul class="submenu" id="submenu-agentes">
+          <li><a href="#agentes-ia">Ver todos los Agentes IA</a></li>
+          <li><a href="#automatizaciones">Automatizaciones</a></li>
+          <li><a href="#gestor-correos">Gestor de correos</a></li>
+          <li><a href="#ordenacion-bandeja">Ordenación de bandeja</a></li>
+          <li><a href="#otras-automatizaciones">Otras a medida</a></li>
+        </ul>
+      </li>
+
+      <!-- Enlace simple -->
+      <li><a href="#modelos-llm-chatsbotses">Modelos LLM</a></li>
+
+      <!-- Enlace con Submenú -->
+      <li class="has-submenu">
+        <div class="menu-item-wrapper">
+            <a href="#recursos">Recursos</a>
+            <button class="submenu-toggle" type="button" aria-label="Alternar submenú de Recursos" aria-expanded="false" aria-controls="submenu-recursos">
+                <span aria-hidden="true">▼</span>
+            </button>
+        </div>
+        <ul class="submenu" id="submenu-recursos">
+          <li><a href="#recursos">Ver todos los Recursos</a></li>
+          <li><a href="#panel-control-chatsbotses">Panel de control Akutangulo</a></li>
+          <li><a href="#como-crear-prompts">Cómo crear Prompts</a></li>
+          <li><a href="#guia-openwebui">Guía Open Web UI</a></li>
+          <li><a href="#guia-notion">Guía Notion</a></li>
+          <li><a href="#guia-telegram">Guía Telegram</a></li>
+          <li><a href="#que-es-un-chatbot-ia">Qué es un Chatbot IA</a></li>
+          <li><a href="#que-es-un-agente-ia">Qué es un Agente IA</a></li>
+          <li><a href="#que-es-una-automatizacion-ia">Qué es una Automatización IA</a></li>
+        </ul>
+      </li>
+
+      <!-- Enlace simple -->
+      <li><a href="#precios-chatsbotses-automatizaciones">Precios</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+
+    <nav class="propmts-ia">
+      <button type="button" class="cta-button pulse btn-contacto">Pide tu presupuesto personalizado</button>
+      <a href="./como-crear-prompts.html" class="cta-button pulse">Cómo crear Prompts efectivos</a>
+    </nav>
+        <cambiar-tema-chatsbotses></cambiar-tema-chatsbotses>
+    </header>
+    <main>
+        <h1 class="neon-text">Chatbot de IA para servicio al cliente automatizado y generación de oportunidades de venta</h1>
+        <div style="height: 600px;"></div>
+        
+    </main>
+  <section class="contenedor-botones-chatsbotses">
+
+    <!-- Botón Telegram (flip down) -->
+    <a href="https://t.me/akutangulo" rel="noopener noreferrer me" target="_blank" title="Sigue a Akutangulo en Telegram" aria-label="Sigue a Akutangulo en Telegram y entérate de las últimas noticias sobre Inteligencia Artificial." role="button">
+      <div class="boton-akutangulo boton-akutangulo-flip3d-down">
+        <div class="flipper3d">
+          <div class="boton-aku front">
+            <i class="fa-brands fa-telegram iconos-botones-sociales telegram" aria-hidden="true"></i>
+          </div>
+          <div class="boton-aku back">
+            Sígueme en Telegram<br><strong>Akutangulo</strong>
+          </div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Botón Facebook (flip up) -->
+    <a href="https://www.facebook.com/profile.php?id=61567044121441" rel="noopener noreferrer" target="_blank" title="Sígueme en Facebook" role="button">
+      <div class="boton-akutangulo boton-akutangulo-flip3d-up">
+        <div class="flipper3d">
+          <div class="boton-aku front">
+            <i class="fab fa-facebook-square iconos-botones-sociales" aria-hidden="true"></i>
+          </div>
+          <div class="boton-aku back">
+            Sígueme en Facebook<br/><b>Chatsbotses Akutangulo</b>
+          </div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Botón Twitter (flip up) -->
+    <a href="https://x.com/chatsbotses" rel="noopener noreferrer" target="_blank" title="Sígueme en Twitter" role="button">
+      <div class="boton-akutangulo boton-akutangulo-flip3d-up">
+        <div class="flipper3d">
+          <div class="boton-aku front">
+            <i class="fa fa-twitter iconos-botones-sociales" aria-hidden="true"></i>
+          </div>
+          <div class="boton-aku back">
+            Sígueme en Twitter<br/><b>@chatsbotses</b>
+          </div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Botón Email (flip down) -->
+    <a href="mailto:info@chatsbots.es?subject=Solicitud%20de%20informacion" title="Envíame un correo electrónico" role="button">
+      <div class="boton-akutangulo boton-akutangulo-flip3d-down">
+        <div class="flipper3d">
+          <div class="boton-aku front">
+            <i class="fas fa-at iconos-botones-sociales" aria-hidden="true"></i>
+          </div>
+          <div class="boton-aku back">
+            Contacta por mail desde<br/>
+            <b>info@chatsbots.es</b>
+          </div>
+        </div>
+      </div>
+    </a>
+
+  </section>
+
+<footer>
+    <p class="footer-legal">© <span class="copyright-year">2025</span> <span class="icon"><icono-chatsbotses size="35px"></icono-chatsbotses></span> ChatsBotsES Inteligentes. Todos los derechos reservados.</p>
+    <!-- ENLACES CORREGIDOS: Enlaces de contenido apuntan a secciones de contenido -->
+    <p>
+        <a href="#inicio">Inicio</a> | 
+        <a href="#chatbots-atencion-cliente">Chatbots de atención al cliente 24/7</a> | 
+        <a href="#chatbots-internos">Chatbots para empleados</a> | 
+        <a href="#memoria-rag">Chatbots con memoria</a> | 
+        <a href="#gestor-correos">Agentes para gestionar correos</a> | 
+        <a href="#automatizaciones">Automatizaciones a medida</a> | 
+        <a href="#modelos-llm-chatsbotses">Modelos LLM</a> | 
+        <a href="#precios-chatsbotses-automatizaciones">Precios</a> | 
+        <a href="#contacto">Contacto</a>
+    </p>
+    <!-- Enlaces legales se mantienen correctos -->
+    <p><a href="legal/politica-privacidad.html">Política de Privacidad</a> | <a href="legal/politica-cookies.html">Política de Cookies</a> | <a href="legal/aviso-legal.html">Aviso Legal</a> | <a href="legal/terminos-condiciones.html">Términos y Condiciones del Servicio</a> | <a href="#" class="btn-contacto">Contacto</a></p>
     
-    <script src="./assets/js/chatsbotses.js"></script>
+</footer>
+<div class="footer">
+  <div class="footer-logo">
+    <a href="https://akutangulo.com" title="Logo de Akutangulo diseño de páginas web, posicionamiento SEO, fotografía 360 para empresas, chatbots y agentes con Inteligencia Artificial en Valladolid. Oscar Navarro.">
+      <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="35.000000pt" height="35.000000pt" viewBox="0 0 58.000000 67.000000" preserveAspectRatio="xMidYMid meet">
+       <metadata>Logo de Akutangulo diseño de páginas web, posicionamiento SEO, fotografía 360 para empresas, chatbots y agentes con Inteligencia Artificial en Valladolid. Oscar Navarro. </metadata>
+       <g transform="translate(0.000000,65.000000) scale(0.100000,-0.100000)" fill="#9300D3" stroke="none">
+       <path class="animacion-logo-svg" d="M175 551 c-112 -52 -169 -207 -120 -329 19 -45 86 -112 172 -169 51 -35 52 -35 77 -16 24 17 25 22 26 125 l0 106 -38 -5 c-51 -7 -77 21 -68 72 8 42 41 60 80 45 40 -15 46 -40 46 -182 l0 -133 90 9 90 10 0 156 c0 147 -1 159 -25 207 -26 51 -72 91 -128 112 -46 18 -157 13 -202 -8z"></path>
+       </g>
+       </svg>          
+    </a>
+  </div>
+<div class="copyright">
+  <p>Web diseñada con amor ❤️ por <a href="https://akutangulo.com" rel="noopener" target="_blank" title="Akutangulo diseño de páginas web, posicionamiento SEO, fotografía 360 para empresas y chatbots y agentes con Inteligencia Artificial en Valladolid" aria-label="Akutangulo diseño de páginas web, posicionamiento SEO, fotografía 360 para empresas, chatbots y agentes con Inteligencia Artificial en Valladolid" class="akutangulo-diseño-web-seo-ia">Akutangulo.com</a></p> 
+</div>
+
+</div>
+<boton-volver-arriba></boton-volver-arriba>
+<!-- Font Awesome -->
+<script src="https://kit.fontawesome.com/64393aa48f.js" crossorigin="anonymous" async></script>
 <script>
-// Nueva lógica migrada para ZDR
-const ALL_MODELS_URL = 'https://openrouter.ai/api/v1/models';
-const ZDR_MODELS_URL = 'https://openrouter.ai/api/v1/endpoints/zdr';
-
-const container = document.getElementById('models-container');
-const statusMessage = document.getElementById('status-message');
-const mainTitle = document.getElementById('main-title');
-const showZDRCheckbox = document.getElementById('showZDRCheckbox');
-const sortSelect = document.getElementById('sortSelect');
-const typeSelect = document.getElementById('typeSelect');
-const moderationSelect = document.getElementById('moderationSelect');
-const searchInput = document.getElementById('searchInput');
-let allModels = [];
-let searchTerm = '';
-let debounceTimer;
-let zdrModelIds = new Set();
-let zdrProviderData = new Map();
-
-const formatters = {
-    price: (v, u = 'tokens') => {
-        const n = parseFloat(v);
-        if (isNaN(n)) return 'N/A';
-        if (n === 0) return 'Gratis';
-        const precioFinal = n * 1.5; // Margen del 50%
-        const r = u === 'tokens' ? (precioFinal * 1e6).toFixed(4) : precioFinal.toFixed(6);
-        return `$${parseFloat(r)} / ${u === 'tokens' ? '1M tokens' : u}`;
-    },
-    tokens: (v) => {
-        if (typeof v !== 'number' || v <= 0) return 'N/A';
-        return v.toLocaleString('es-ES') + ' tokens';
-    },
-    fullDate: t => new Intl.DateTimeFormat('es-ES', { dateStyle: 'long' }).format(new Date(t * 1000)),
-    capitalize: s => s ? s.charAt(0).toUpperCase() + s.slice(1) : 'N/A'  // Corregido: era 'str' en lugar de 's'
-};
-
-function filterModelsByType(models, type) {
-    switch (type) {
-        case 'all': return models;
-        case 'text-only': return models.filter(m => m.architecture?.input_modalities?.length === 1 && m.architecture.input_modalities[0] === 'text');
-        case 'multimodal': return models.filter(m => m.architecture?.input_modalities?.includes('image'));
-        case 'image-generation': return models.filter(m => m.architecture?.output_modalities?.includes('image'));
-        case 'audio-capable': return models.filter(m => m.architecture?.input_modalities?.includes('audio'));
-        case 'reasoning': return models.filter(m => m.supported_parameters?.some(p => ['reasoning', 'include_reasoning'].includes(p)) || /reasoning|thinking|prover|logic/i.test(m.description));
-        case 'code': return models.filter(m => /code|coder|codex|devstral|swe-bench|humaneval|codestral/i.test(m.name) || /code|coder|codex|devstral|swe-bench|humaneval|codestral/i.test(m.description));
-        case 'creative': return models.filter(m => /roleplay|story|creative|narrative|anubis|euryale|midnight|magnum|lumimaid|rocinante/i.test(m.name) || /roleplay|story|creative|narrative/i.test(m.description));
-        case 'moderation': return models.filter(m => /guard|safety|moderation|classify content/i.test(m.name) || /guard|safety|moderation|classify content/i.test(m.description));
-        case 'tools': return models.filter(m => m.supported_parameters?.some(p => ['tools', 'tool_choice'].includes(p)));
-        case 'web-search': return models.filter(m => parseFloat(m.pricing?.web_search) > 0 || m.supported_parameters?.includes('web_search_options') || /web search|deep research/i.test(m.description));
-        case 'rag': return models.filter(m => /(RAG|retrieval-augmented|retrieval systems)/i.test(m.description));
-        case 'structured-output': return models.filter(m => m.supported_parameters?.includes('structured_outputs'));
-        case 'moe': return models.filter(m => /Mixture-of-Experts|MoE/i.test(m.description));
-        default: return models;
-    }
-}
-
-function createModelElement(model) {
-    const item = document.createElement('li');
-    item.className = 'model-item';
-    const summary = document.createElement('div');
-    summary.className = 'model-summary';
-    const nameWrapper = document.createElement('div');
-    nameWrapper.className = 'model-name-wrapper';
-    nameWrapper.title = 'Hacer clic para copiar ID del modelo';
-    const nameSpan = document.createElement('span');
-    nameSpan.className = 'model-name';
-    nameSpan.textContent = model.name;
-    const copyIcon = document.createElement('span');
-    copyIcon.className = 'copy-icon';
-    copyIcon.innerHTML = `<svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"></path></svg>`;
-    nameWrapper.appendChild(nameSpan);
-    nameWrapper.appendChild(copyIcon);
-    const summaryRight = document.createElement('div');
-    summaryRight.className = 'summary-right-section';
-    const sortProperty = sortSelect.value.split('-')[0];
-    if (sortSelect.value !== 'created-desc') {
-        const metric = document.createElement('span');
-        metric.className = 'sort-metric';
-        let metricValue = '';
-        switch (sortProperty) {
-            case 'prompt_price': metricValue = formatters.price(model.pricing?.prompt); break;
-            case 'completion_price': metricValue = formatters.price(model.pricing?.completion); break;
-            case 'context_length': metricValue = formatters.tokens(model.context_length); break;
-            case 'max_completion_tokens': metricValue = formatters.tokens(model.top_provider?.max_completion_tokens); break;
-        }
-        metric.textContent = metricValue;
-        summaryRight.appendChild(metric);
-    }
-    const summaryIcons = document.createElement('div');
-    summaryIcons.className = 'summary-icons';
-    if (model.architecture?.input_modalities?.includes('image')) summaryIcons.innerHTML += `<span title="Capacidad de Visión (Entrada)">👁️</span>`;
-    if (model.architecture?.output_modalities?.includes('image')) summaryIcons.innerHTML += `<span title="Generación de Imágenes (Salida)">🎨</span>`;
-    if (model.architecture?.input_modalities?.includes('audio')) summaryIcons.innerHTML += `<span title="Capacidad de Audio (Entrada)">🎧</span>`;
-    if (model.supported_parameters?.some(p => ['reasoning', 'include_reasoning'].includes(p))) summaryIcons.innerHTML += `<span title="Capacidad de Razonamiento">🧠</span>`;
-    if (parseFloat(model.pricing?.web_search || 0) > 0 || model.supported_parameters?.includes('web_search_options')) summaryIcons.innerHTML += `<span title="Capacidad de Búsqueda Web">🌐</span>`;
-    if (model.supported_parameters?.some(p => ['tools', 'tool_choice'].includes(p))) summaryIcons.innerHTML += `<span title="Soporte para Herramientas">🛠️</span>`;
-    if (zdrModelIds.has(model.id)) summaryIcons.innerHTML += `<span title="Zero Data Retention (ZDR)">🛡️</span>`;
-    if (summaryIcons.innerHTML) {
-        summaryRight.appendChild(summaryIcons);
-    }
-    summary.appendChild(nameWrapper);
-    summary.appendChild(summaryRight);
-    const details = document.createElement('div');
-    details.className = 'model-details';
-    const providerName = zdrProviderData.get(model.id) || model.top_provider?.name || 'Con procesamiento persistente';
-    const hfLink = model.hugging_face_id ? `<span><strong>Ficha Técnica:</strong> <a href="https://huggingface.co/${model.hugging_face_id}" target="_blank" rel="noopener noreferrer">${model.hugging_face_id}</a></span>` : '';
-    const orLink = model.canonical_slug ? `<span><strong>Página del Modelo:</strong> <a href="https://openrouter.ai/models/${model.canonical_slug}" target="_blank" rel="noopener noreferrer">Ver en OpenRouter</a></span>` : '';
-    const instructType = model.architecture?.instruct_type ? `<span><strong>Formato Instrucción:</strong> ${model.architecture.instruct_type}</span>` : '';
-    let pricingDetailsHTML = '';
-    if (parseFloat(model.pricing?.image || 0) > 0) pricingDetailsHTML += `<span><strong>Precio por Imagen:</strong> ${formatters.price(model.pricing.image, 'imagen')}</span>`;
-    if (parseFloat(model.pricing?.internal_reasoning || 0) > 0) pricingDetailsHTML += `<span><strong>Precio Razonamiento:</strong> ${formatters.price(model.pricing.internal_reasoning)}</span>`;
-    if (parseFloat(model.pricing?.web_search || 0) > 0) pricingDetailsHTML += `<span><strong>Precio Búsqueda Web:</strong> ${formatters.price(model.pricing.web_search, 'búsqueda')}</span>`;
-    details.innerHTML = `<div class="detail-grid"><span><strong>ID del Modelo:</strong> ${model.id}</span><span><strong>Proveedor:</strong> ${providerName}</span><span><strong>Lanzado el:</strong> ${formatters.fullDate(model.created)}</span><span><strong>Contexto:</strong> ${formatters.tokens(model.context_length)}</span><span><strong>Salida Máxima:</strong> ${formatters.tokens(model.top_provider?.max_completion_tokens)}</span><span><strong>Moderado:</strong> ${model.top_provider?.is_moderated ? 'Sí' : 'No'}</span><span><strong>Tokenizer:</strong> ${model.architecture?.tokenizer || 'N/A'}</span>${instructType}<span><strong>Entradas:</strong> ${formatters.capitalize(model.architecture?.input_modalities?.join(', '))}</span><span><strong>Salidas:</strong> ${formatters.capitalize(model.architecture?.output_modalities?.join(', '))}</span>${orLink}${hfLink}<hr style="grid-column: 1 / -1; border: 0; border-top: 1px dashed var(--border-color); margin: 5px 0;"><span><strong>Precio Entrada:</strong> ${formatters.price(model.pricing?.prompt)}</span><span><strong>Precio Salida:</strong> ${formatters.price(model.pricing?.completion)}</span>${pricingDetailsHTML}</div>`;
-    item.appendChild(summary);
-    item.appendChild(details);
-    nameWrapper.addEventListener('click', (e) => {
-        e.stopPropagation();
-        navigator.clipboard.writeText(model.id).then(() => {
-            if (!nameWrapper.classList.contains('copied')) {
-                nameWrapper.classList.add('copied');
-                setTimeout(() => nameWrapper.classList.remove('copied'), 1500);
-            }
-        }).catch(err => console.error('Error al copiar al portapapeles:', err));
-    });
-    summary.addEventListener('click', () => details.classList.toggle('expanded'));
-    return item;
-}
-
-function renderDisplay(models, sortBy) {
-    container.innerHTML = '';
-    if (models.length === 0) {
-        statusMessage.style.display = 'block';
-        statusMessage.textContent = 'No se encontraron modelos con los filtros seleccionados.';
-        return;
-    }
-    statusMessage.style.display = 'none';
-    if (sortBy === 'created-desc') {
-        const grouped = models.reduce((acc, m) => {
-            const date = new Date(m.created * 1000);
-            const key = new Intl.DateTimeFormat('es-ES', { month: 'long', year: 'numeric' }).format(date).replace(/^\w/, c => c.toUpperCase());
-            if (!acc[key]) acc[key] = [];
-            acc[key].push(m);
-            return acc;
-        }, {});
-        const sortedGroupKeys = Object.keys(grouped).sort((a, b) => {
-            const dateA = new Date(grouped[a][0].created * 1000);
-            const dateB = new Date(grouped[b][0].created * 1000);
-            return dateB - dateA;
-        });
-        for (const groupName of sortedGroupKeys) {
-            const header = document.createElement('h2');
-            header.className = 'group-header';
-            header.textContent = groupName;
-            container.appendChild(header);
-            const list = document.createElement('ul');
-            list.className = 'model-list';
-            grouped[groupName].forEach(model => list.appendChild(createModelElement(model)));
-            container.appendChild(list);
-        }
-    } else {
-        const list = document.createElement('ul');
-        list.className = 'model-list';
-        models.forEach(model => list.appendChild(createModelElement(model)));
-        container.appendChild(list);
-    }
-}
-
-function updateDisplay() {
-    let processedModels = [...allModels];
-
-    // Nuevo filtro ZDR condicional
-    if (showZDRCheckbox.checked) {
-        processedModels = processedModels.filter(m => zdrModelIds.has(m.id));
-    }
-
-    processedModels = filterModelsByType(processedModels, typeSelect.value);
-
-    // FILTRO HARDCODEADO DE CHATSBOTSES: Ocultar siempre modelos gratuitos
-    processedModels = processedModels.filter(m => !(parseFloat(m.pricing?.prompt || 0) === 0 && parseFloat(m.pricing?.completion || 0) === 0));
-
-    const moderationFilter = moderationSelect.value;
-    if (moderationFilter !== 'all') {
-        processedModels = processedModels.filter(m => {
-            const isModerated = m.top_provider?.is_moderated === true;
-            return (moderationFilter === 'moderated') ? isModerated : !isModerated;
-        });
-    }
-    if (searchTerm.trim() !== '') {
-    const term = searchTerm.trim().toLowerCase();
-    processedModels = processedModels.filter(m => 
-        (m.name && m.name.toLowerCase().includes(term)) || 
-        (m.id && m.id.toLowerCase().includes(term)) ||
-        (zdrModelIds.has(m.id) && zdrProviderData.get(m.id)?.toLowerCase().includes(term)) ||  
-        (m.top_provider?.name && m.top_provider.name.toLowerCase().includes(term))  
-    );
-}
-
-    mainTitle.textContent = `${processedModels.length} modelos LLM que ofrece ChatsBotsES`;
-
-    const [property, order] = sortSelect.value.split('-');
-    processedModels.sort((a, b) => {
-        let valA, valB;
-        const asc = order === 'asc';
-        if (property === 'created') {
-            valA = a.created;
-            valB = b.created;
-            return order === 'desc' ? valB - valA : valA - valB;
-        }
-        if (property === 'max_completion_tokens') {
-            valA = a.top_provider?.max_completion_tokens ?? (asc ? Infinity : -1);
-            valB = b.top_provider?.max_completion_tokens ?? (asc ? Infinity : -1);
-        } else if (property.includes('price')) {
-            const priceKey = property.split('_')[0];
-            valA = parseFloat(a.pricing?.[priceKey] || (asc ? Infinity : -1)) * 1.5;
-            valB = parseFloat(b.pricing?.[priceKey] || (asc ? Infinity : -1)) * 1.5;
-        } else {
-            valA = a[property] ?? (asc ? Infinity : -1);
-            valB = b[property] ?? (asc ? Infinity : -1);
-        }
-        return asc ? valA - valB : valB - valA;
-    });
-
-    renderDisplay(processedModels, sortSelect.value);
-}
-
-function showError(message) {
-    statusMessage.style.display = 'block';
-    statusMessage.style.color = 'var(--error-color)';
-    statusMessage.innerHTML = `<div class="error-message"><p>${message}</p><button class="retry-button" onclick="location.reload()">Reintentar</button></div>`;
-}
-
-async function fetchModels() {
-    try {
-        statusMessage.textContent = 'Cargando y cruzando datos de modelos...';
-
-        const [allModelsResponse, zdrModelsResponse] = await Promise.all([
-            fetch(ALL_MODELS_URL),
-            fetch(ZDR_MODELS_URL)
-        ]);
-
-        if (!allModelsResponse.ok || !zdrModelsResponse.ok) {
-            throw new Error(`Error en API: General=${allModelsResponse.status}, ZDR=${zdrModelsResponse.status}`);
-        }
-
-        const allModelsData = await allModelsResponse.json();
-        const zdrModelsData = await zdrModelsResponse.json();
-
-        // MODIFICADO: Guardamos los datos de la API ZDR
-        if (zdrModelsData.data && Array.isArray(zdrModelsData.data)) {
-            zdrModelsData.data.forEach(model => {
-                const modelId = (model.name.split(' | ')[1] || model.name);
-                zdrModelIds.add(modelId);
-                zdrProviderData.set(modelId, model.provider_name);
-            });
-        }
-
-        // Guardamos TODOS los modelos, el filtrado se hace en updateDisplay()
-        allModels = (allModelsData.data || []).filter(m => m.id !== 'openrouter/auto');
-
-        updateDisplay();
-
-    } catch (error) {
-        console.error('Error al obtener y cruzar los modelos:', error);
-        showError('Hubo un problema al conectar con las APIs. Por favor, inténtalo de nuevo.');
-        mainTitle.textContent = 'Error al cargar modelos desde ChatsBotsES';
-    }
-}
-
-function setupEventListeners() {
-    // MODIFICADO: El checkbox de ZDR tiene su listener
-    [showZDRCheckbox, sortSelect, typeSelect, moderationSelect].forEach(el => {
-        if (el) el.addEventListener('change', updateDisplay);
-    });
-
-    if (searchInput) {
-        searchInput.addEventListener('input', () => {
-            clearTimeout(debounceTimer);
-            debounceTimer = setTimeout(() => {
-                searchTerm = searchInput.value;
-                updateDisplay();
-            }, 300);
-        });
-    }
-}
-
 document.addEventListener('DOMContentLoaded', () => {
-    setupEventListeners();
-    fetchModels();
+
+  // --- SELECCIÓN DE ELEMENTOS DEL DOM ---
+  const hamburger = document.getElementById('hamburger');
+  const menu = document.getElementById('menu');
+  const submenuItems = document.querySelectorAll('.has-submenu');
+  const MOBILE_BREAKPOINT = 768;
+  
+  // Selector para elementos enfocables (se usa para la trampa de foco)
+  const focusableElementsSelector = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+  let firstFocusableElement;
+  let lastFocusableElement;
+
+  // --- FUNCIONES DE UTILIDAD ---
+  const isMobile = () => window.innerWidth <= MOBILE_BREAKPOINT;
+
+  // --- GESTIÓN DEL MENÚ MÓVIL (HAMBURGUESA) ---
+
+  const closeMobileMenu = () => {
+    if (!menu.classList.contains('active')) return;
+    
+    menu.classList.remove('active');
+    hamburger.setAttribute('aria-expanded', 'false');
+    // Si estamos en móvil, ocultar para lectores de pantalla
+    if (isMobile()) menu.setAttribute('aria-hidden', 'true'); 
+    closeAllSubmenus(); // Cierra todos los submenús al cerrar el menú principal
+  };
+
+  const openMobileMenu = () => {
+    if (menu.classList.contains('active')) return;
+
+    menu.classList.add('active');
+    hamburger.setAttribute('aria-expanded', 'true');
+    // Si estamos en móvil, mostrar para lectores de pantalla
+    if (isMobile()) menu.setAttribute('aria-hidden', 'false');
+  };
+
+  const toggleMobileMenu = () => {
+    menu.classList.contains('active') ? closeMobileMenu() : openMobileMenu();
+  };
+
+
+  // --- GESTIÓN DE SUBMENÚS ---
+
+  const closeSubmenu = (item) => {
+    if (!item || !item.classList.contains('open')) return;
+
+    // Ahora seleccionamos el nuevo <button>
+    const toggle = item.querySelector('.submenu-toggle'); 
+    const submenu = item.querySelector('.submenu');
+
+    item.classList.remove('open');
+    if (toggle) toggle.setAttribute('aria-expanded', 'false');
+    if (submenu) submenu.style.maxHeight = '0px';
+  };
+
+  const openSubmenu = (item) => {
+    if (!item || item.classList.contains('open')) return;
+
+    // Cierra otros submenús antes de abrir el nuevo para evitar múltiples abiertos
+    closeAllSubmenus();
+
+    // Ahora seleccionamos el nuevo <button>
+    const toggle = item.querySelector('.submenu-toggle'); 
+    const submenu = item.querySelector('.submenu');
+
+    item.classList.add('open');
+    if (toggle) toggle.setAttribute('aria-expanded', 'true');
+    
+    // Usamos scrollHeight para que la altura sea siempre dinámica y precisa
+    if (submenu) submenu.style.maxHeight = `${submenu.scrollHeight}px`;
+  };
+
+  const closeAllSubmenus = () => {
+    submenuItems.forEach(closeSubmenu);
+  };
+  
+  // --- GESTIÓN DE LA TRAMPA DE FOCO (FOCUS TRAP) ---
+  const handleFocusTrap = (e) => {
+    // Solo activo si el menú está abierto y estamos en móvil
+    if (!menu.classList.contains('active') || !isMobile()) return;
+
+    // Obtener la lista de elementos enfocables dentro del menú
+    // .filter(el => el.offsetParent !== null) asegura que estén visibles (no display: none)
+    const focusableElements = Array.from(menu.querySelectorAll(focusableElementsSelector)).filter(el => el.offsetParent !== null);
+    
+    if (focusableElements.length === 0) return;
+
+    // El último elemento enfocable es el último enlace del último submenú abierto, o el último enlace simple.
+    firstFocusableElement = focusableElements[0];
+    lastFocusableElement = focusableElements[focusableElements.length - 1];
+
+    if (e.key === 'Tab' || e.keyCode === 9) {
+        if (e.shiftKey) { // Shift + Tab (navegación hacia atrás)
+            if (document.activeElement === firstFocusableElement) {
+                lastFocusableElement.focus();
+                e.preventDefault();
+            }
+        } else { // Tab (navegación hacia adelante)
+            if (document.activeElement === lastFocusableElement) {
+                firstFocusableElement.focus();
+                e.preventDefault();
+            }
+        }
+    }
+  };
+
+
+  // --- ASIGNACIÓN DE EVENTOS (EVENT LISTENERS) ---
+
+  // 1. Botón de hamburguesa
+  hamburger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleMobileMenu();
+    
+    // Una vez abierto, mover el foco al primer elemento enfocable (enlace "Inicio")
+    if (menu.classList.contains('active')) {
+        setTimeout(() => { // Esperar la transición para asegurar que es enfocable
+            const firstLink = menu.querySelector('a');
+            if (firstLink) firstLink.focus();
+        }, 300); 
+    }
+  });
+
+  // 2. Controladores de submenú (Aplica la Opción 2: Clic en texto o flecha abre el submenú)
+  submenuItems.forEach(item => {
+    const toggle = item.querySelector('.submenu-toggle'); // El botón (flecha)
+    const link = item.querySelector('.menu-item-wrapper > a'); // El enlace (texto)
+
+    // Listener para el botón (ya existía)
+    if (toggle) {
+      toggle.addEventListener('click', (e) => {
+        e.stopPropagation(); 
+        item.classList.contains('open') ? closeSubmenu(item) : openSubmenu(item);
+      });
+    }
+    
+    // Listener para el enlace (NUEVO: Hace que el clic en el texto ABRA/CIERRE el submenú)
+    if (link) {
+        link.addEventListener('click', (e) => {
+            // El preventDefault BLOQUEA LA NAVEGACIÓN, permitiendo que el clic solo sea un TOGGLE.
+            e.preventDefault(); 
+            e.stopPropagation(); 
+            
+            // Abrimos/cerramos el submenú, igual que el botón
+            item.classList.contains('open') ? closeSubmenu(item) : openSubmenu(item);
+        });
+    }
+
+  });
+  
+  // 3. Cerrar menús al hacer clic fuera de la barra de navegación
+  document.addEventListener('click', (e) => {
+    // Si el clic no es dentro de la navbar
+    if (!e.target.closest('.navbar')) {
+      closeMobileMenu();
+      closeAllSubmenus();
+    }
+  });
+
+  // 4. Cerrar menú móvil al hacer clic en un enlace de navegación
+  menu.addEventListener('click', (e) => {
+    // Solo si estamos en móvil y el clic es en un <a> (que no es un toggle)
+    if (isMobile() && e.target.tagName === 'A' && (!e.target.closest('.menu-item-wrapper') || e.target.closest('.submenu'))) {
+      closeMobileMenu();
+    }
+  });
+  
+  // 5. Agregar Listener para Focus Trap
+  document.addEventListener('keydown', handleFocusTrap);
+
+  // 6. Gestionar el cambio de tamaño de la ventana
+  window.addEventListener('resize', () => {
+    // Si pasamos a vista de escritorio, nos aseguramos de que el menú móvil esté cerrado y visible
+    if (!isMobile()) {
+      if (menu.classList.contains('active')) {
+        closeMobileMenu();
+      }
+      menu.setAttribute('aria-hidden', 'false'); // Debe ser accesible en escritorio
+    } else {
+      // Si pasamos a móvil, nos aseguramos de que el estado ARIA sea correcto
+      menu.setAttribute('aria-hidden', !menu.classList.contains('active'));
+    }
+
+    // Recalcular la altura de los submenús abiertos al redimensionar, para evitar cortes
+    document.querySelectorAll('.has-submenu.open .submenu').forEach(submenu => {
+      submenu.style.maxHeight = `${submenu.scrollHeight}px`;
+    });
+  });
+
+  // --- ESTADO INICIAL ---
+  // Al cargar la página, asegura que el estado ARIA del menú sea el correcto
+  const setInitialAriaState = () => {
+    // Solo oculta si estamos en móvil Y no tiene la clase 'active'
+    if (isMobile() && !menu.classList.contains('active')) {
+        menu.setAttribute('aria-hidden', 'true');
+    } else {
+        menu.setAttribute('aria-hidden', 'false');
+    }
+  };
+
+  setInitialAriaState();
 });
 </script>
+    <script>document.querySelectorAll(".copyright-year").forEach(function(element) {element.textContent = new Date().getFullYear();});</script>
+    <script type="module" src="./assets/js/web-components/boton-volver-arriba.js"></script>
+    <script type="module" src="./assets/js/web-components/icono-chatsbotses.js"></script>
+    <script type="module" src="./assets/js/web-components/cambiar-tema-chatsbotses.js"></script>
 </body>
 </html>
